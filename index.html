@@ -23,8 +23,6 @@ a{color:inherit;text-decoration:none}
 .w-full{width:100%}
 .center{text-align:center}
 [hidden]{display:none !important}
-
-/* Header */
 .header{position:sticky;top:0;z-index:60;backdrop-filter:blur(16px);background:rgba(246,247,251,.85);border-bottom:1px solid var(--border)}
 .nav{display:flex;align-items:center;gap:.6rem;height:64px}
 .brand{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.05rem}
@@ -35,8 +33,6 @@ a{color:inherit;text-decoration:none}
 .badge{position:absolute;top:-6px;right:-6px;min-width:19px;height:19px;padding:0 5px;background:var(--primary);color:#fff;border-radius:99px;font-size:.68rem;font-weight:800;display:grid;place-items:center;border:2px solid var(--bg)}
 .badge.hide{display:none}
 .badge.alert{background:var(--danger)}
-
-/* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.1rem;border-radius:12px;font-weight:600;font-size:.9rem;transition:.2s}
 .btn:active{transform:scale(.97)}
 .btn:disabled{opacity:.5}
@@ -45,8 +41,6 @@ a{color:inherit;text-decoration:none}
 .btn-wa{background:var(--wa);color:#fff}
 .btn-sm{padding:.5rem .8rem;font-size:.82rem;border-radius:9px}
 .btn-block{width:100%}
-
-/* Hero */
 .hero{padding:3rem 0 2.5rem;position:relative;overflow:hidden}
 .hero-glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.4;pointer-events:none}
 .g1{width:400px;height:400px;background:var(--primary);top:-160px;left:-100px}
@@ -58,8 +52,6 @@ a{color:inherit;text-decoration:none}
 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p.lead{font-size:1rem;color:var(--muted);margin-bottom:1.6rem}
 .hero-btns{display:flex;flex-wrap:wrap;gap:.7rem}
-
-/* Catalog */
 .catalog{padding:1rem 0 5rem}
 .section-head{margin-bottom:1.5rem}
 .eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);display:block;margin-bottom:.35rem}
@@ -70,8 +62,6 @@ a{color:inherit;text-decoration:none}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0}
 .chip{padding:.45rem .9rem;border-radius:99px;font-size:.82rem;font-weight:600;background:var(--surface);border:1px solid var(--border);color:var(--muted)}
 .chip.active{background:var(--text);color:var(--bg);border-color:var(--text)}
-
-/* Grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1rem}
 @keyframes cardIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.3s;animation:cardIn .4s backwards}
@@ -95,11 +85,7 @@ a{color:inherit;text-decoration:none}
 .out-msg{padding:.55rem;border-radius:9px;background:rgba(239,68,68,.12);color:var(--danger);font-weight:700;font-size:.78rem;text-align:center}
 .empty{text-align:center;padding:3rem 1rem;color:var(--muted);background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius)}
 .load-more-wrap{display:flex;justify-content:center;margin-top:2rem}
-
-/* Footer */
 .footer{border-top:1px solid var(--border);padding:2rem 0 1.5rem;margin-top:2rem;text-align:center;color:var(--muted);font-size:.85rem}
-
-/* Drawer */
 .overlay{position:fixed;inset:0;background:rgba(6,8,16,.55);opacity:0;visibility:hidden;transition:.3s;z-index:110}
 .overlay.show{opacity:1;visibility:visible}
 .drawer{position:fixed;top:0;right:0;height:100%;width:min(400px,92vw);background:var(--surface);z-index:120;display:flex;flex-direction:column;transform:translateX(105%);transition:transform .35s;border-left:1px solid var(--border)}
@@ -121,8 +107,6 @@ a{color:inherit;text-decoration:none}
 .drawer-foot{padding:1rem 1.2rem 1.3rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem}
 .cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.3rem}
 .cart-total strong{font-size:1.3rem;font-weight:900}
-
-/* Modal */
 .modal{position:fixed;inset:0;z-index:130;display:grid;place-items:center;padding:.8rem;background:rgba(6,8,16,.6);opacity:0;visibility:hidden;transition:.25s;overflow-y:auto}
 .modal.open{opacity:1;visibility:visible}
 .modal-box{background:var(--surface);border-radius:20px;width:min(700px,100%);max-height:95vh;overflow-y:auto;padding:1.4rem;box-shadow:0 30px 70px rgba(0,0,0,.35);transform:translateY(15px);transition:.3s;margin:auto}
@@ -156,8 +140,6 @@ textarea.input{resize:vertical;min-height:70px}
 .alert-box{display:flex;gap:.7rem;padding:.9rem 1rem;border-radius:12px;margin-bottom:1rem;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);font-size:.82rem;align-items:flex-start}
 .alert-box.danger{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35)}
 .alert-box b{display:block;margin-bottom:.15rem}
-
-/* Setup screen */
 .setup-screen{min-height:100vh;display:grid;place-items:center;padding:1.2rem}
 .setup-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.8rem 1.5rem;max-width:560px;width:100%;box-shadow:var(--shadow)}
 .setup-card h1{font-size:1.4rem;font-weight:900;margin-bottom:.4rem;letter-spacing:-.02em}
@@ -166,8 +148,6 @@ textarea.input{resize:vertical;min-height:70px}
 .setup-help{background:var(--surface-2);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1rem;font-size:.82rem;line-height:1.65}
 .setup-help ol{padding-left:1.2rem}
 .setup-help li{margin-bottom:.35rem}
-
-/* Debug panel */
 .debug-log{position:fixed;bottom:0;left:0;right:0;max-height:35vh;overflow-y:auto;background:#0a0c14;color:#eef0f7;font-family:ui-monospace,monospace;font-size:.72rem;padding:.7rem;z-index:500;border-top:2px solid var(--danger);display:none}
 .debug-log.show{display:block}
 .debug-log div{padding:.15rem 0;border-bottom:1px solid rgba(255,255,255,.06);word-break:break-word}
@@ -175,20 +155,12 @@ textarea.input{resize:vertical;min-height:70px}
 .debug-log .ok{color:#7bff9e}
 .debug-log .info{color:#7bbaff}
 .debug-toggle{position:fixed;bottom:1rem;left:1rem;z-index:501;width:44px;height:44px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;box-shadow:var(--shadow);font-size:.7rem;font-weight:800;color:var(--muted)}
-
-/* Error banner */
 .err-banner{position:fixed;top:0;left:0;right:0;background:var(--danger);color:#fff;padding:.7rem 1rem;font-size:.85rem;font-weight:600;z-index:400;text-align:center;transform:translateY(-100%);transition:transform .3s;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .err-banner.show{transform:none}
-
-/* WhatsApp float */
 .wa-float{position:fixed;bottom:1.3rem;right:1.3rem;z-index:100;width:56px;height:56px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff;box-shadow:0 12px 30px -6px rgba(37,211,102,.75)}
-.wa-float:hover{transform:scale(1.08)}
-
-/* Toast */
 .toast-wrap{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:.4rem;align-items:center;pointer-events:none}
 .toast{background:var(--text);color:var(--bg);padding:.65rem 1.1rem;border-radius:99px;font-size:.82rem;font-weight:600;box-shadow:0 10px 24px rgba(0,0,0,.25);animation:toastIn .3s;max-width:90vw}
 @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
 @media (max-width:520px){
   .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem}
   .card-actions{flex-direction:column}
@@ -199,12 +171,10 @@ textarea.input{resize:vertical;min-height:70px}
 </head>
 <body>
 
-<!-- ============ SETUP SCREEN (primera vez) ============ -->
 <div class="setup-screen" id="setupScreen" hidden>
   <div class="setup-card">
     <h1>🛍️ Configura tu tienda</h1>
     <p>Solo la primera vez. Pega tus credenciales de Supabase y listo.</p>
-
     <div class="setup-help">
       <b>¿De dónde saco estos datos?</b>
       <ol>
@@ -214,23 +184,19 @@ textarea.input{resize:vertical;min-height:70px}
         <li>Copia <b>Project URL</b> y <b>anon public</b></li>
       </ol>
     </div>
-
     <div class="field">
       <label>Project URL</label>
       <input class="input" id="setupUrl" placeholder="https://xxxxx.supabase.co" autocapitalize="off" autocorrect="off" spellcheck="false" />
     </div>
-
     <div class="field">
       <label>anon public key</label>
       <textarea class="input" id="setupKey" placeholder="eyJhbGciOiJIUzI1NiIs..." autocapitalize="off" autocorrect="off" spellcheck="false" rows="4"></textarea>
     </div>
-
     <button class="btn btn-primary btn-block" id="setupSave">Guardar y entrar a mi tienda</button>
     <button class="btn btn-ghost btn-block btn-sm" id="setupReset" style="margin-top:.5rem" hidden>Borrar datos guardados</button>
   </div>
 </div>
 
-<!-- ============ TIENDA ============ -->
 <div id="app" hidden>
 
 <header class="header">
@@ -303,7 +269,6 @@ textarea.input{resize:vertical;min-height:70px}
   <div class="drawer-foot" id="cartFoot"></div>
 </aside>
 
-<!-- Modal admin -->
 <div class="modal" id="adminModal">
   <div class="modal-box">
     <div id="loginView">
@@ -311,4 +276,766 @@ textarea.input{resize:vertical;min-height:70px}
       <p class="muted" style="font-size:.85rem;margin-bottom:1rem">Entra con tu correo y contraseña de Supabase.</p>
       <div class="field">
         <label>Correo</label>
-        <input type="email" clas
+        <input type="email" class="input" id="adminEmail" placeholder="tu@email.com" autocapitalize="off" autocorrect="off" spellcheck="false" />
+      </div>
+      <div class="field">
+        <label>Contraseña</label>
+        <input type="password" class="input" id="adminPass" placeholder="••••••••" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" data-close-modal>Cancelar</button>
+        <button class="btn btn-primary" id="loginBtn">Entrar</button>
+      </div>
+    </div>
+    <div id="panelView" hidden>
+      <div class="panel-head">
+        <div>
+          <h3>Panel admin</h3>
+          <p class="muted" style="font-size:.78rem" id="adminEmailLabel"></p>
+        </div>
+        <button class="icon-btn" data-close-modal>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="lowStockAlert"></div>
+      <form id="productForm">
+        <input type="hidden" id="productId" />
+        <div class="row">
+          <div class="field"><label>Nombre *</label><input class="input" id="pName" required maxlength="80" /></div>
+          <div class="field"><label>Precio *</label><input class="input" id="pPrice" type="number" min="0" step="0.01" required /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Categoría</label><input class="input" id="pCategory" maxlength="40" /></div>
+          <div class="field"><label>Stock *</label><input class="input" id="pStock" type="number" min="0" step="1" required value="10" /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Estado</label>
+            <select class="input" id="pVisible"><option value="true">Visible</option><option value="false">Oculto</option></select>
+          </div>
+          <div class="field"><label>Umbral stock bajo</label><input class="input" id="pLowStock" type="number" min="0" step="1" value="5" /></div>
+        </div>
+        <div class="field"><label>Descripción</label><textarea class="input" id="pDesc" maxlength="300"></textarea></div>
+        <div class="field">
+          <label>Imagen</label>
+          <div class="img-row">
+            <img class="preview" id="pPreview" alt="preview" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='70'><rect width='70' height='70' fill='%23e5e7eb'/></svg>" />
+            <div style="flex:1;display:flex;flex-direction:column;gap:.5rem">
+              <label class="file-drop" for="pFile">📁 Subir imagen (máx 3 MB)<input type="file" id="pFile" accept="image/*" /></label>
+              <input class="input" id="pImageUrl" placeholder="...o pega una URL https://" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="cancelEdit" hidden>Cancelar edición</button>
+          <button type="submit" class="btn btn-primary" id="saveBtn">Publicar producto</button>
+        </div>
+      </form>
+      <div class="section-title">Productos (<span id="adminCount">0</span>)</div>
+      <div class="admin-list" id="adminList"></div>
+      <div class="section-title">Configuración de la tienda</div>
+      <div class="row">
+        <div class="field"><label>Nombre de la tienda</label><input class="input" id="cfgTienda" maxlength="40" /></div>
+        <div class="field"><label>WhatsApp (solo números)</label><input class="input" id="cfgWhatsapp" inputmode="numeric" placeholder="5215512345678" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Moneda</label><input class="input" id="cfgMoneda" maxlength="4" /></div>
+        <div class="field"><label>Productos por página</label><input class="input" id="cfgPageSize" type="number" min="6" max="60" /></div>
+      </div>
+      <div class="field"><label>Umbral global de stock bajo</label><input class="input" id="cfgStockBajo" type="number" min="0" /></div>
+      <div class="modal-actions" style="justify-content:space-between">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Cerrar sesión</button>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" id="changeSetup">Cambiar credenciales Supabase</button>
+          <button class="btn btn-primary" id="saveConfigBtn">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+</a>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+</div>
+
+<div class="debug-log" id="debugLog"></div>
+<button class="debug-toggle" id="debugToggle" title="Ver errores">LOG</button>
+<div class="err-banner" id="errBanner"></div>
+
+<script>
+const logEl = document.getElementById('debugLog');
+function log(msg, type = 'info') {
+  const d = document.createElement('div');
+  d.className = type;
+  d.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+  console.log(msg);
+}
+function showError(msg) {
+  const b = document.getElementById('errBanner');
+  b.textContent = msg;
+  b.classList.add('show');
+  setTimeout(() => b.classList.remove('show'), 6000);
+  log('ERROR: ' + msg, 'err');
+}
+window.onerror = (m, s, l, c, e) => { showError(m + ' (línea ' + l + ')'); return false; };
+window.addEventListener('unhandledrejection', e => showError('Promesa: ' + (e.reason?.message || e.reason)));
+document.getElementById('debugToggle').onclick = () => logEl.classList.toggle('show');
+
+const LS_CRED = 'mitienda:creds';
+const LS_CART = 'mitienda:cart';
+
+function getCreds() {
+  try { return JSON.parse(localStorage.getItem(LS_CRED) || 'null'); }
+  catch { return null; }
+}
+function saveCreds(url, key) {
+  localStorage.setItem(LS_CRED, JSON.stringify({ url: url.trim().replace(/\/+$/, ''), key: key.trim() }));
+}
+function clearCreds() { localStorage.removeItem(LS_CRED); }
+
+const $  = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cleanPhone = s => String(s || '').replace(/\D/g, '').slice(0, 15);
+function debounce(fn, ms = 180) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+
+function toast(msg, ms = 2400) {
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  $('#toastWrap').appendChild(el);
+  setTimeout(() => {
+    el.style.transition = 'opacity .3s, transform .3s';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(10px)';
+    setTimeout(() => el.remove(), 320);
+  }, ms);
+}
+
+const setupScreen = $('#setupScreen');
+const appEl = $('#app');
+let supabase = null;
+let state = null;
+
+function mostrarSetup() {
+  setupScreen.hidden = false;
+  appEl.hidden = true;
+  const creds = getCreds();
+  if (creds) {
+    $('#setupUrl').value = creds.url || '';
+    $('#setupKey').value = creds.key || '';
+    $('#setupReset').hidden = false;
+  }
+}
+function ocultarSetup() {
+  setupScreen.hidden = true;
+  appEl.hidden = false;
+}
+
+$('#setupSave').onclick = async () => {
+  const url = $('#setupUrl').value.trim();
+  const key = $('#setupKey').value.trim();
+  if (!url.startsWith('https://')) return showError('La URL debe empezar con https://');
+  if (!key.startsWith('eyJ')) return showError('La clave debe empezar con eyJ...');
+  if (url.includes('/rest/v1')) return showError('Quita /rest/v1 del final de la URL');
+  saveCreds(url, key);
+  log('Credenciales guardadas: ' + url, 'ok');
+  ocultarSetup();
+  await arrancarApp();
+};
+
+$('#setupReset').onclick = () => {
+  if (!confirm('¿Borrar credenciales guardadas?')) return;
+  clearCreds();
+  $('#setupUrl').value = '';
+  $('#setupKey').value = '';
+  $('#setupReset').hidden = true;
+  toast('Credenciales borradas');
+};
+
+async function arrancarApp() {
+  const creds = getCreds();
+  if (!creds) return mostrarSetup();
+
+  try {
+    supabase = window.supabase.createClient(creds.url, creds.key);
+    log('Cliente Supabase creado', 'ok');
+  } catch (e) {
+    showError('No se pudo crear el cliente: ' + e.message);
+    return mostrarSetup();
+  }
+
+  state = {
+    config: { tienda: 'Mi Tienda', whatsapp: '', moneda: '$', pageSize: 12, stockBajo: 5 },
+    products: [],
+    cart: JSON.parse(localStorage.getItem(LS_CART) || '[]'),
+    filter: 'all',
+    search: '',
+    editingId: null,
+    pendingImage: null,
+    isAdmin: false,
+    visibleCount: 12
+  };
+
+  $('#year').textContent = new Date().getFullYear();
+
+  try {
+    const { data, error } = await supabase.from('configuracion').select('*').eq('id', 1).maybeSingle();
+    if (error) { log('Error config: ' + error.message, 'err'); showError('Configuración: ' + error.message); }
+    else if (data) {
+      state.config = {
+        tienda: data.tienda || 'Mi Tienda',
+        whatsapp: data.whatsapp || '',
+        moneda: data.moneda || '$',
+        pageSize: data.page_size || 12,
+        stockBajo: data.stock_bajo || 5
+      };
+      state.visibleCount = state.config.pageSize;
+      log('Config cargada: ' + state.config.tienda, 'ok');
+    } else { log('No hay fila de configuración.', 'info'); }
+  } catch (e) { log('Config ex: ' + e.message, 'err'); }
+
+  try {
+    const { data, error } = await supabase.from('productos').select('*').order('created_at', { ascending: false });
+    if (error) { log('Error productos: ' + error.message, 'err'); showError('Productos: ' + error.message); }
+    else { state.products = data || []; log('Productos cargados: ' + state.products.length, 'ok'); }
+  } catch (e) { log('Productos ex: ' + e.message, 'err'); }
+
+  try {
+    const { data } = await supabase.auth.getSession();
+    if (data?.session) {
+      state.isAdmin = true;
+      $('#adminEmailLabel').textContent = data.session.user.email || '';
+      log('Sesión activa: ' + data.session.user.email, 'ok');
+    }
+  } catch (e) { log('Sesión ex: ' + e.message, 'err'); }
+
+  renderTodo();
+  bindEventos();
+  log('App lista ✅', 'ok');
+}
+
+function stockStatus(p) {
+  if (p.stock <= 0) return 'out';
+  if (p.stock <= (p.low_stock ?? state.config.stockBajo)) return 'low';
+  return 'ok';
+}
+function visibleProducts() { return state.products.filter(p => p.visible !== false); }
+function filteredProducts() {
+  const q = state.search.trim().toLowerCase();
+  return visibleProducts().filter(p => {
+    if (state.filter !== 'all' && p.categoria !== state.filter) return false;
+    if (!q) return true;
+    return (p.nombre || '').toLowerCase().includes(q) || (p.descripcion || '').toLowerCase().includes(q);
+  });
+}
+function lowStockProducts() {
+  return state.products.filter(p => p.visible !== false && stockStatus(p) !== 'ok');
+}
+
+function renderChips() {
+  const cats = ['all', ...new Set(visibleProducts().map(p => p.categoria).filter(Boolean))];
+  $('#chips').innerHTML = cats.map(c =>
+    `<button class="chip ${state.filter === c ? 'active' : ''}" data-cat="${esc(c)}">${c === 'all' ? 'Todos' : esc(c)}</button>`
+  ).join('');
+}
+
+function cardHTML(p, i) {
+  const s = stockStatus(p);
+  const out = s === 'out';
+  const img = esc(p.imagen || 'https://picsum.photos/seed/' + p.id + '/400/400');
+  let badge = s === 'out' ? '<span class="stock-badge out">AGOTADO</span>'
+            : s === 'low' ? `<span class="stock-badge low">Quedan ${p.stock}</span>`
+            : `<span class="stock-badge ok">${p.stock} disp.</span>`;
+  return `<article class="card ${out ? 'out-of-stock' : ''}" style="animation-delay:${Math.min(i*20,250)}ms">
+    <div class="card-img">
+      ${p.categoria ? `<span class="card-badge">${esc(p.categoria)}</span>` : ''}
+      ${badge}
+      <img src="${img}" alt="${esc(p.nombre)}" loading="lazy" decoding="async">
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">${esc(p.nombre)}</h3>
+      ${p.descripcion ? `<p class="card-desc">${esc(p.descripcion)}</p>` : ''}
+      <div class="card-price ${out ? 'strike' : ''}">${state.config.moneda}${Number(p.precio).toFixed(2)}</div>
+      <div class="card-actions">
+        ${out ? '<span class="out-msg">Agotado</span>'
+              : `<button class="btn btn-primary" data-action="add" data-id="${p.id}">Añadir</button>`}
+        <button class="btn btn-ghost" data-action="ask" data-id="${p.id}">💬</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderGrid(reset = false) {
+  const list = filteredProducts();
+  const grid = $('#grid');
+  const empty = $('#empty');
+  const lmWrap = $('#loadMoreWrap');
+  if (reset) state.visibleCount = state.config.pageSize;
+  const toShow = list.slice(0, state.visibleCount);
+  if (!list.length) {
+    grid.innerHTML = '';
+    empty.hidden = false;
+    lmWrap.hidden = true;
+    return;
+  }
+  empty.hidden = true;
+  grid.innerHTML = toShow.map(cardHTML).join('');
+  lmWrap.hidden = list.length <= state.visibleCount;
+  if (!lmWrap.hidden) $('#loadMoreBtn').textContent = `Cargar más (${list.length - state.visibleCount} restantes)`;
+}
+
+function renderAdminList() {
+  $('#adminCount').textContent = state.products.length;
+  const list = $('#adminList');
+  if (!state.products.length) {
+    list.innerHTML = '<p class="muted center" style="padding:1rem 0;font-size:.85rem">Aún no hay productos.</p>';
+    return;
+  }
+  list.innerHTML = state.products.map(p => {
+    const s = stockStatus(p);
+    const cls = s === 'out' ? 'out-stock' : s === 'low' ? 'low-stock' : '';
+    const stockTag = s === 'out' ? '<span class="tag-out">Agotado</span>'
+      : s === 'low' ? `<span class="tag-low">Stock bajo: ${p.stock}</span>`
+      : `${p.stock} en stock`;
+    return `<div class="admin-item ${cls}">
+      <img src="${esc(p.imagen || '')}" alt="">
+      <div class="ai-info">
+        <div class="ai-name">${esc(p.nombre)}</div>
+        <div class="ai-meta">${state.config.moneda}${Number(p.precio).toFixed(2)} · ${esc(p.categoria || 'General')} · ${stockTag}${p.visible === false ? ' · <span class="tag-off">Oculto</span>' : ''}</div>
+      </div>
+      <button class="icon-btn" data-admin="edit" data-id="${p.id}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </button>
+      <button class="icon-btn" data-admin="del" data-id="${p.id}" style="color:var(--danger)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function renderLowStockAlert() {
+  const wrap = $('#lowStockAlert');
+  const list = lowStockProducts();
+  const badge = $('#adminAlert');
+  if (list.length) { badge.textContent = list.length; badge.classList.remove('hide'); }
+  else badge.classList.add('hide');
+  if (!list.length) { wrap.innerHTML = ''; return; }
+  const hasOut = list.some(p => p.stock <= 0);
+  wrap.innerHTML = `<div class="alert-box ${hasOut ? 'danger' : ''}">
+    <div style="flex:1">
+      <b>⚠️ ${list.length} producto${list.length === 1 ? '' : 's'} con stock bajo</b>
+      ${list.slice(0,3).map(p => esc(p.nombre)).join(', ')}${list.length>3?'…':''}
+    </div>
+    <button class="btn btn-wa btn-sm" id="notifyStockBtn">Avisar</button>
+  </div>`;
+}
+
+function renderCart() {
+  state.cart = state.cart.filter(i => state.products.some(p => p.id === i.id && p.stock > 0));
+  const wrap = $('#cartItems');
+  const foot = $('#cartFoot');
+  const count = state.cart.reduce((s, i) => s + i.qty, 0);
+  const badge = $('#cartCount');
+  badge.textContent = count;
+  badge.classList.toggle('hide', count === 0);
+  if (!state.cart.length) {
+    wrap.innerHTML = '<p class="muted center" style="padding:2.5rem 0;font-size:.9rem">Carrito vacío 🛒</p>';
+    foot.innerHTML = '';
+    return;
+  }
+  let total = 0;
+  wrap.innerHTML = state.cart.map(item => {
+    const p = state.products.find(x => x.id === item.id);
+    if (!p) return '';
+    const sub = Number(p.precio) * item.qty;
+    total += sub;
+    const atMax = item.qty >= p.stock;
+    return `<div class="cart-item">
+      <img src="${esc(p.imagen || '')}" alt="">
+      <div class="ci-info">
+        <div class="ci-name">${esc(p.nombre)}</div>
+        <div class="ci-price">${state.config.moneda}${sub.toFixed(2)}</div>
+        <div class="qty">
+          <button data-cart="dec" data-id="${p.id}">−</button>
+          <span>${item.qty}</span>
+          <button data-cart="inc" data-id="${p.id}" ${atMax ? 'disabled' : ''}>+</button>
+        </div>
+      </div>
+      <button class="ci-del" data-cart="del" data-id="${p.id}">✕</button>
+    </div>`;
+  }).join('');
+  foot.innerHTML = `<div class="cart-total"><span>Total</span><strong>${state.config.moneda}${total.toFixed(2)}</strong></div>
+    <button class="btn btn-wa w-full" id="checkoutBtn">Pedir por WhatsApp</button>
+    <button class="btn btn-ghost w-full btn-sm" id="clearCartBtn">Vaciar carrito</button>`;
+}
+
+function renderTodo() {
+  $('#brandName').textContent = state.config.tienda;
+  $('#footerBrand').textContent = state.config.tienda;
+  document.title = state.config.tienda + ' · Tienda';
+  const msg = `Hola ${state.config.tienda} 👋, quiero más información.`;
+  const wa = state.config.whatsapp
+    ? `https://wa.me/${cleanPhone(state.config.whatsapp)}?text=${encodeURIComponent(msg)}`
+    : '#';
+  $('#waFloat').href = wa;
+  $('#heroWa').href = wa;
+  renderChips();
+  renderGrid(true);
+  renderCart();
+  if (state.isAdmin) renderLowStockAlert();
+}
+
+function addToCart(id) {
+  const p = state.products.find(x => x.id === id);
+  if (!p || p.stock <= 0) return toast('❌ Agotado');
+  const item = state.cart.find(i => i.id === id);
+  const cur = item ? item.qty : 0;
+  if (cur >= p.stock) return toast(`Solo hay ${p.stock}`);
+  if (item) item.qty += 1;
+  else state.cart.push({ id, qty: 1 });
+  localStorage.setItem(LS_CART, JSON.stringify(state.cart));
+  renderCart();
+  toast('✓ Añadido');
+}
+function changeQty(id, delta) {
+  const item = state.cart.find(i => i.id === id);
+  const p = state.products.find(x => x.id === id);
+  if (!item || !p) return;
+  const next = item.qty + delta;
+  if (next > p.stock) return toast(`Solo hay ${p.stock}`);
+  if (next <= 0) state.cart = state.cart.filter(i => i.id !== id);
+  else item.qty = next;
+  localStorage.setItem(LS_CART, JSON.stringify(state.cart));
+  renderCart();
+}
+function removeFromCart(id) {
+  state.cart = state.cart.filter(i => i.id !== id);
+  localStorage.setItem(LS_CART, JSON.stringify(state.cart));
+  renderCart();
+}
+
+async function checkout() {
+  if (!state.cart.length) return;
+  if (!state.config.whatsapp) return toast('⚠️ WhatsApp no configurado');
+  const ids = state.cart.map(i => i.id);
+  const { data: fresh } = await supabase.from('productos').select('id,stock,nombre,precio').in('id', ids);
+  for (const item of state.cart) {
+    const p = fresh?.find(x => x.id === item.id);
+    if (!p || p.stock < item.qty) {
+      toast(`❌ "${p?.nombre || 'Producto'}" sin stock suficiente`);
+      await recargarProductos();
+      return;
+    }
+  }
+  const lines = state.cart.map(i => {
+    const p = fresh.find(x => x.id === i.id);
+    return `• ${i.qty} × ${p.nombre} — ${state.config.moneda}${(Number(p.precio) * i.qty).toFixed(2)}`;
+  });
+  const total = state.cart.reduce((s, i) => {
+    const p = fresh.find(x => x.id === i.id);
+    return s + Number(p.precio) * i.qty;
+  }, 0);
+  const msg = `Hola ${state.config.tienda} 👋, quiero pedir:\n\n${lines.join('\n')}\n\n*Total: ${state.config.moneda}${total.toFixed(2)}*`;
+  for (const item of state.cart) {
+    const p = fresh.find(x => x.id === item.id);
+    await supabase.from('productos').update({ stock: p.stock - item.qty }).eq('id', item.id);
+  }
+  await recargarProductos();
+  state.cart = [];
+  localStorage.setItem(LS_CART, '[]');
+  renderCart();
+  window.open(`https://wa.me/${cleanPhone(state.config.whatsapp)}?text=${encodeURIComponent(msg)}`, '_blank');
+  toast('Abriendo WhatsApp...');
+}
+
+function askProduct(id) {
+  const p = state.products.find(x => x.id === id);
+  if (!p) return;
+  if (!state.config.whatsapp) return toast('⚠️ WhatsApp no configurado');
+  const stockTxt = p.stock > 0 ? `Disponibles: ${p.stock}` : 'Agotado';
+  const msg = `Hola, me interesa:\n*${p.nombre}* — ${state.config.moneda}${Number(p.precio).toFixed(2)}\n${stockTxt}`;
+  window.open(`https://wa.me/${cleanPhone(state.config.whatsapp)}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+async function recargarProductos() {
+  const { data } = await supabase.from('productos').select('*').order('created_at', { ascending: false });
+  state.products = data || [];
+  renderGrid(true);
+  renderCart();
+  if (state.isAdmin) { renderAdminList(); renderLowStockAlert(); }
+}
+
+function openAdmin() {
+  if (state.isAdmin) {
+    $('#loginView').hidden = true;
+    $('#panelView').hidden = false;
+    fillConfigForm();
+    renderAdminList();
+    renderLowStockAlert();
+  } else {
+    $('#loginView').hidden = false;
+    $('#panelView').hidden = true;
+  }
+  $('#adminModal').classList.add('open');
+}
+function closeAdmin() { $('#adminModal').classList.remove('open'); }
+
+function fillConfigForm() {
+  $('#cfgTienda').value = state.config.tienda;
+  $('#cfgWhatsapp').value = state.config.whatsapp;
+  $('#cfgMoneda').value = state.config.moneda;
+  $('#cfgPageSize').value = state.config.pageSize;
+  $('#cfgStockBajo').value = state.config.stockBajo;
+}
+
+function resetForm() {
+  state.editingId = null;
+  state.pendingImage = null;
+  $('#productForm').reset();
+  $('#productId').value = '';
+  $('#pVisible').value = 'true';
+  $('#pStock').value = 10;
+  $('#pLowStock').value = state.config.stockBajo;
+  $('#pPreview').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='70' height='70'><rect width='70' height='70' fill='%23e5e7eb'/></svg>";
+  $('#saveBtn').textContent = 'Publicar producto';
+  $('#cancelEdit').hidden = true;
+}
+
+function editProduct(id) {
+  const p = state.products.find(x => x.id === id);
+  if (!p) return;
+  state.editingId = id;
+  state.pendingImage = p.imagen || null;
+  $('#productId').value = id;
+  $('#pName').value = p.nombre || '';
+  $('#pPrice').value = p.precio ?? '';
+  $('#pCategory').value = p.categoria || '';
+  $('#pDesc').value = p.descripcion || '';
+  $('#pStock').value = p.stock ?? 0;
+  $('#pLowStock').value = p.low_stock ?? state.config.stockBajo;
+  $('#pVisible').value = p.visible === false ? 'false' : 'true';
+  $('#pImageUrl').value = (p.imagen && p.imagen.startsWith('http')) ? p.imagen : '';
+  if (p.imagen) $('#pPreview').src = p.imagen;
+  $('#saveBtn').textContent = 'Guardar cambios';
+  $('#cancelEdit').hidden = false;
+  $('#productForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function subirImagen(file) {
+  if (file.size > 3 * 1024 * 1024) throw new Error('Imagen > 3 MB');
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const filename = `${uid()}.${ext}`;
+  const { error } = await supabase.storage.from('productos').upload(filename, file, { cacheControl: '3600' });
+  if (error) throw new Error(error.message);
+  const { data } = supabase.storage.from('productos').getPublicUrl(filename);
+  return data.publicUrl;
+}
+
+function bindEventos() {
+  $('#grid').onclick = e => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    if (btn.dataset.action === 'add') addToCart(btn.dataset.id);
+    if (btn.dataset.action === 'ask') askProduct(btn.dataset.id);
+  };
+  $('#chips').onclick = e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    state.filter = chip.dataset.cat;
+    renderChips();
+    renderGrid(true);
+  };
+  $('#searchInput').oninput = debounce(e => {
+    state.search = e.target.value;
+    renderGrid(true);
+  }, 180);
+  $('#loadMoreBtn').onclick = () => {
+    state.visibleCount += state.config.pageSize;
+    renderGrid(false);
+  };
+
+  const overlay = $('#overlay'), drawer = $('#cartDrawer');
+  const openCart = () => { drawer.classList.add('open'); overlay.classList.add('show'); };
+  const closeCart = () => { drawer.classList.remove('open'); overlay.classList.remove('show'); };
+  $('#cartBtn').onclick = openCart;
+  $('#closeCart').onclick = closeCart;
+  overlay.onclick = closeCart;
+
+  drawer.onclick = e => {
+    const btn = e.target.closest('[data-cart]');
+    if (btn) {
+      const { cart: a, id } = btn.dataset;
+      if (a === 'inc') changeQty(id, 1);
+      if (a === 'dec') changeQty(id, -1);
+      if (a === 'del') removeFromCart(id);
+      return;
+    }
+    if (e.target.closest('#checkoutBtn')) checkout();
+    if (e.target.closest('#clearCartBtn')) {
+      state.cart = [];
+      localStorage.setItem(LS_CART, '[]');
+      renderCart();
+      toast('Carrito vaciado');
+    }
+  };
+
+  $('#adminBtn').onclick = openAdmin;
+  $$('[data-close-modal]').forEach(b => b.onclick = closeAdmin);
+  $('#adminModal').onclick = e => { if (e.target.id === 'adminModal') closeAdmin(); };
+
+  $('#loginBtn').onclick = async () => {
+    const email = $('#adminEmail').value.trim();
+    const pass = $('#adminPass').value;
+    if (!email || !pass) return toast('Completa los campos');
+    $('#loginBtn').disabled = true;
+    $('#loginBtn').textContent = 'Entrando...';
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+    $('#loginBtn').disabled = false;
+    $('#loginBtn').textContent = 'Entrar';
+    if (error) { showError(error.message); return toast('❌ ' + error.message); }
+    state.isAdmin = true;
+    $('#adminEmailLabel').textContent = data.user.email;
+    $('#adminPass').value = '';
+    openAdmin();
+    renderLowStockAlert();
+    toast('✓ Bienvenido');
+  };
+  $('#adminPass').onkeydown = e => { if (e.key === 'Enter') $('#loginBtn').click(); };
+
+  $('#logoutBtn').onclick = async () => {
+    await supabase.auth.signOut();
+    state.isAdmin = false;
+    closeAdmin();
+    $('#adminAlert').classList.add('hide');
+    toast('Sesión cerrada');
+  };
+
+  $('#changeSetup').onclick = () => {
+    if (confirm('Esto borrará tus credenciales y volverás a la pantalla de configuración. ¿Continuar?')) {
+      clearCreds();
+      location.reload();
+    }
+  };
+
+  $('#pFile').onchange = async e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      toast('⏳ Subiendo...');
+      const url = await subirImagen(file);
+      state.pendingImage = url;
+      $('#pPreview').src = url;
+      $('#pImageUrl').value = '';
+      toast('✓ Imagen subida');
+    } catch (err) { showError(err.message); }
+  };
+  $('#pImageUrl').oninput = e => {
+    const url = e.target.value.trim();
+    if (/^https?:\/\//i.test(url)) {
+      state.pendingImage = url;
+      $('#pPreview').src = url;
+    }
+  };
+
+  $('#productForm').onsubmit = async e => {
+    e.preventDefault();
+    if (!state.isAdmin) return;
+    const nombre = $('#pName').value.trim();
+    const precio = parseFloat($('#pPrice').value);
+    const stock = Math.max(0, parseInt($('#pStock').value) || 0);
+    const low_stock = Math.max(0, parseInt($('#pLowStock').value) || 5);
+    if (!nombre || isNaN(precio)) return toast('Completa nombre y precio');
+
+    const data = {
+      nombre, precio, stock, low_stock,
+      categoria: $('#pCategory').value.trim() || 'General',
+      descripcion: $('#pDesc').value.trim(),
+      visible: $('#pVisible').value === 'true',
+      imagen: state.pendingImage || $('#pImageUrl').value.trim() || `https://picsum.photos/seed/${uid()}/600/600`
+    };
+
+    $('#saveBtn').disabled = true;
+    $('#saveBtn').textContent = 'Guardando...';
+
+    let error;
+    if (state.editingId) {
+      ({ error } = await supabase.from('productos').update(data).eq('id', state.editingId));
+    } else {
+      ({ error } = await supabase.from('productos').insert(data));
+    }
+
+    $('#saveBtn').disabled = false;
+    if (error) {
+      $('#saveBtn').textContent = state.editingId ? 'Guardar cambios' : 'Publicar producto';
+      showError(error.message);
+      return toast('❌ ' + error.message);
+    }
+    toast(state.editingId ? '✓ Actualizado' : '✓ Publicado');
+    await recargarProductos();
+    resetForm();
+  };
+
+  $('#cancelEdit').onclick = resetForm;
+
+  $('#adminList').onclick = async e => {
+    const btn = e.target.closest('[data-admin]');
+    if (!btn) return;
+    const { admin: a, id } = btn.dataset;
+    if (a === 'edit') editProduct(id);
+    if (a === 'del') {
+      const p = state.products.find(x => x.id === id);
+      if (!p) return;
+      if (confirm(`¿Eliminar "${p.nombre}"?`)) {
+        const { error } = await supabase.from('productos').delete().eq('id', id);
+        if (error) return showError(error.message);
+        toast('🗑️ Eliminado');
+        await recargarProductos();
+      }
+    }
+  };
+
+  $('#lowStockAlert').onclick = e => {
+    if (e.target.closest('#notifyStockBtn')) {
+      const list = lowStockProducts();
+      if (!state.config.whatsapp) return toast('Configura WhatsApp primero');
+      const lines = list.map(p => `• ${p.nombre} — ${p.stock <= 0 ? 'AGOTADO' : p.stock + ' unidades'}`).join('\n');
+      const msg = `🔔 Stock bajo — ${state.config.tienda}\n\n${lines}`;
+      window.open(`https://wa.me/${cleanPhone(state.config.whatsapp)}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  };
+
+  $('#saveConfigBtn').onclick = async () => {
+    if (!state.isAdmin) return;
+    const cfg = {
+      tienda: $('#cfgTienda').value.trim() || 'Mi Tienda',
+      whatsapp: cleanPhone($('#cfgWhatsapp').value),
+      moneda: $('#cfgMoneda').value.trim() || '$',
+      page_size: Math.min(60, Math.max(6, parseInt($('#cfgPageSize').value) || 12)),
+      stock_bajo: Math.max(0, parseInt($('#cfgStockBajo').value) || 5)
+    };
+    $('#saveConfigBtn').disabled = true;
+    const { error } = await supabase.from('configuracion').update(cfg).eq('id', 1);
+    $('#saveConfigBtn').disabled = false;
+    if (error) { showError(error.message); return toast('❌ ' + error.message); }
+    state.config = { tienda: cfg.tienda, whatsapp: cfg.whatsapp, moneda: cfg.moneda, pageSize: cfg.page_size, stockBajo: cfg.stock_bajo };
+    state.visibleCount = cfg.page_size;
+    toast('✓ Configuración guardada');
+    renderTodo();
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const creds = getCreds();
+  if (!creds) mostrarSetup();
+  else { ocultarSetup(); arrancarApp(); }
+});
+</script>
+</body>
+</html>
