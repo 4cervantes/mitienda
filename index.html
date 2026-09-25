@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Tienda</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+body{font-family:Arial,sans-serif;background:#f0f0f5;margin:0;padding:20px;color:#222}
+h1{color:#6d28d9}
+input,button{padding:10px;font-size:16px;border-radius:8px;border:1px solid #ccc;width:100%;box-sizing:border-box;margin:5px 0}
+button{background:#6d28d9;color:white;border:none;font-weight:bold;cursor:pointer}
+.box{background:white;padding:20px;border-radius:12px;max-width:500px;margin:20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;margin-top:20px;max-width:1000px;margin-left:auto;margin-right:auto}
+.card{background:white;padding:15px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:6px}
+.price{font-weight:bold;color:#6d28d9;font-size:18px;margin:5px 0}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div id="loading" class="box">
+  <h1>Cargando...</h1>
+  <p id="status">Iniciando aplicacion...</p>
+</div>
+
+<div id="setup" class="box" hidden>
+  <h1>Configura tu tienda</h1>
+  <p>Pega tus datos de Supabase:</p>
+  <label>URL del proyecto:</label>
+  <input id="inpUrl" placeholder="https://xxxxx.supabase.co">
+  <label>Clave anon publica:</label>
+  <input id="inpKey" placeholder="eyJhbGci...">
+  <button onclick="guardarCreds()">Guardar y entrar</button>
+  <p id="setupMsg" style="color:red"></p>
+</div>
+
+<div id="tienda" hidden>
+  <div style="display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto">
+    <h1 id="tituloTienda">Mi Tienda</h1>
+    <button style="width:auto;padding:8px 12px" onclick="abrirAdmin()">Admin</button>
+  </div>
+  <div class="box">
+    <input id="buscador" placeholder="Buscar productos..." oninput="filtrar()">
+  </div>
+  <div id="productos" class="grid"></div>
+</div>
+
+<div id="adminModal" hidden style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);overflow-y:auto;padding:20px;z-index:100">
+  <div style="background:white;padding:20px;border-radius:12px;max-width:600px;margin:20px auto">
+    <h2>Panel Admin</h2>
+    <div id="loginBox">
+      <input id="email" type="email" placeholder="Tu correo">
+      <input id="password" type="password" placeholder="Tu contrasena">
+      <button onclick="login()">Entrar</button>
+      <button onclick="cerrarAdmin()" style="background:#ccc">Cerrar</button>
+      <p id="loginMsg" style="color:red"></p>
+    </div>
+    <div id="panelBox" hidden>
+      <h3>Nuevo producto</h3>
+      <input id="pNombre" placeholder="Nombre">
+      <input id="pPrecio" type="number" placeholder="Precio">
+      <input id="pStock" type="number" placeholder="Stock">
+      <input id="pCategoria" placeholder="Categoria">
+      <input id="pImagen" placeholder="URL de imagen">
+      <button onclick="crearProducto()">Publicar</button>
+      <hr>
+      <h3>Productos existentes</h3>
+      <div id="listaAdmin"></div>
+      <hr>
+      <h3>Configuracion</h3>
+      <input id="cfgNombre" placeholder="Nombre de la tienda">
+      <input id="cfgWhatsapp" placeholder="WhatsApp (ej 5215512345678)">
+      <button onclick="guardarConfig()">Guardar configuracion</button>
+      <button onclick="logout()" style="background:#ccc">Cerrar sesion</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var supa = null;
+var productos = [];
+
+function $(id){return document.getElementById(id);}
+function show(id){$(id).hidden = false;}
+function hide(id){$(id).hidden = true;}
+
+function iniciar() {
+  try {
+    var url = localStorage.getItem('creds_url');
+    var key = localStorage.getItem('creds_key');
+    if (url && key) {
+      supa = supabase.createClient(url, key);
+      hide('loading');
+      show('tienda');
+      cargarTodo();
+    } else {
+      hide('loading');
+      show('setup');
+    }
+  } catch(e) {
+    alert('Error inicio: ' + e.message);
+  }
+}
+
+function guardarCreds() {
+  var url = $('inpUrl').value.trim();
+  var key = $('inpKey').value.trim();
+  if (!url.startsWith('https://')) {
+    $('setupMsg').textContent = 'La URL debe empezar con https://';
+    return;
+  }
+  if (!key.startsWith('eyJ')) {
+    $('setupMsg').textContent = 'La clave debe empezar con eyJ';
+    return;
+  }
+  localStorage.setItem('creds_url', url.replace(/\/+$/, ''));
+  localStorage.setItem('creds_key', key);
+  location.reload();
+}
+
+async function cargarTodo() {
+  try {
+    var r = await supa.from('configuracion').select('*').eq('id', 1).maybeSingle();
+    if (r.data) {
+      $('tituloTienda').textContent = r.data.tienda || 'Mi Tienda';
+      $('cfgNombre').value = r.data.tienda || '';
+      $('cfgWhatsapp').value = r.data.whatsapp || '';
+      if (r.data.whatsapp) localStorage.setItem('whatsapp', r.data.whatsapp);
+    }
+    var r2 = await supa.from('productos').select('*').order('created_at', {ascending:false});
+    productos = r2.data || [];
+    mostrarProductos();
+  } catch(e) {
+    alert('Error cargando datos: ' + e.message);
+  }
+}
+
+function mostrarProductos() {
+  var html = '';
+  for (var i = 0; i < productos.length; i++) {
+    var p = productos[i];
+    if (p.visible === false) continue;
+    var stockTxt = p.stock > 0 ? p.stock + ' disponibles' : 'AGOTADO';
+    var stockColor = p.stock > 0 ? '#10b981' : '#ef4444';
+    html += '<div class="card">';
+    html += '<img src="' + (p.imagen || 'https://picsum.photos/seed/' + p.id + '/400') + '">';
+    html += '<h3>' + p.nombre + '</h3>';
+    html += '<div class="price">$' + Number(p.precio).toFixed(2) + '</div>';
+    html += '<div style="color:' + stockColor + ';font-size:12px;font-weight:bold">' + stockTxt + '</div>';
+    html += '<button onclick="agregarAlCarrito(\'' + p.id + '\')" style="margin-top:8px">Pedir por WhatsApp</button>';
+    html += '</div>';
+  }
+  $('productos').innerHTML = html;
+  $('listaAdmin').innerHTML = productos.map(function(p){
+    return '<div style="padding:8px;border-bottom:1px solid #eee">' + p.nombre + ' - $' + p.precio + ' (stock: ' + p.stock + ') <button style="width:auto;padding:4px 8px;font-size:12px" onclick="borrarProducto(\'' + p.id + '\')">Borrar</button></div>';
+  }).join('');
+}
+
+function filtrar() {
+  var q = $('buscador').value.toLowerCase();
+  var cards = document.querySelectorAll('#productos .card');
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].style.display = cards[i].textContent.toLowerCase().indexOf(q) > -1 ? '' : 'none';
+  }
+}
+
+function agregarAlCarrito(id) {
+  var p = null;
+  for (var i = 0; i < productos.length; i++) {
+    if (productos[i].id === id) { p = productos[i]; break; }
+  }
+  if (!p) return;
+  if (p.stock <= 0) { alert('Producto agotado'); return; }
+  var wa = localStorage.getItem('whatsapp') || '';
+  var num = wa.replace(/\D/g, '');
+  if (!num) { alert('Configura el WhatsApp en el panel admin'); return; }
+  var msg = 'Hola! Quiero pedir: ' + p.nombre + ' - $' + p.precio;
+  window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(msg));
+}
+
+function abrirAdmin() { show('adminModal'); }
+function cerrarAdmin() { hide('adminModal'); }
+
+async function login() {
+  var email = $('email').value;
+  var pass = $('password').value;
+  var r = await supa.auth.signInWithPassword({email: email, password: pass});
+  if (r.error) {
+    $('loginMsg').textContent = r.error.message;
+    return;
+  }
+  hide('loginBox');
+  show('panelBox');
+}
+
+async function logout() {
+  await supa.auth.signOut();
+  show('loginBox');
+  hide('panelBox');
+}
+
+async function crearProducto() {
+  var p = {
+    nombre: $('pNombre').value,
+    precio: parseFloat($('pPrecio').value),
+    stock: parseInt($('pStock').value) || 0,
+    categoria: $('pCategoria').value || 'General',
+    imagen: $('pImagen').value || 'https://picsum.photos/seed/' + Date.now() + '/400',
+    visible: true,
+    low_stock: 5
+  };
+  var r = await supa.from('productos').insert(p);
+  if (r.error) { alert('Error: ' + r.error.message); return; }
+  alert('Producto creado');
+  $('pNombre').value = '';
+  $('pPrecio').value = '';
+  $('pStock').value = '';
+  $('pCategoria').value = '';
+  $('pImagen').value = '';
+  cargarTodo();
+}
+
+async function borrarProducto(id) {
+  if (!confirm('Borrar producto?')) return;
+  await supa.from('productos').delete().eq('id', id);
+  cargarTodo();
+}
+
+async function guardarConfig() {
+  var cfg = {
+    tienda: $('cfgNombre').value,
+    whatsapp: $('cfgWhatsapp').value.replace(/\D/g, '')
+  };
+  var r = await supa.from('configuracion').update(cfg).eq('id', 1);
+  if (r.error) { alert('Error: ' + r.error.message); return; }
+  localStorage.setItem('whatsapp', cfg.whatsapp);
+  $('tituloTienda').textContent = cfg.tienda;
+  alert('Configuracion guardada');
+}
+
+window.onload = iniciar;
+</script>
+</body>
+</html>
