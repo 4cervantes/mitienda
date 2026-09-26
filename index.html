@@ -30,6 +30,7 @@ a.br:hover{opacity:.85}
 .na{margin-left:auto;display:flex;gap:.5rem}
 .ib{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--sf2);border:1px solid var(--bd);position:relative;transition:.2s}
 .ib:hover{border-color:var(--pr);color:var(--pr)}
+.ib.curBtn{width:auto;min-width:48px;padding:0 .55rem;font-size:.72rem;font-weight:900;letter-spacing:.04em}
 .bg{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;background:linear-gradient(135deg,var(--pr),var(--ac));color:#fff;border-radius:99px;font-size:.7rem;font-weight:800;display:grid;place-items:center;border:2px solid var(--bg)}
 .bg.al{background:var(--dg)}
 .bt{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1.2rem;border-radius:12px;font-weight:600;font-size:.92rem;transition:.2s;white-space:nowrap;text-decoration:none}
@@ -184,20 +185,10 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
             <stop offset="100%" stop-color="#B8730A"/>
           </linearGradient>
         </defs>
-
-        <!-- I -->
         <rect x="10" y="10" width="11" height="30" fill="url(#icbGold)"/>
-
-        <!-- C -->
         <path d="M55 10 C 38 10, 28 17, 28 25 C 28 33, 38 40, 55 40 L55 33 C 45 33, 37 30, 37 25 C 37 20, 45 17, 55 17 Z" fill="url(#icbSilver)"/>
-
-        <!-- B -->
         <path fill-rule="evenodd" fill="url(#icbGold)" d="M68 10 h14 c7 0 12 3.5 12 8 0 3.5 -2 6 -5.5 7.5 4.5 1 7.5 4 7.5 7.5 0 5.5 -5 9 -12.5 9 h-15.5 z M77 16.5 v6 h4.5 c2.5 0 4 -1 4 -3 s-1.5 -3 -4 -3 z M77 28.5 v6 h5 c3 0 4.5 -1 4.5 -3 s-1.5 -3 -4.5 -3 z"/>
-
-        <!-- Swoosh -->
         <path d="M6 44 C 30 51, 72 50, 106 40" stroke="url(#icbSwoosh)" stroke-width="4" fill="none" stroke-linecap="round"/>
-
-        <!-- Carrito -->
         <g transform="translate(112,15)" fill="none" stroke="url(#icbGold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M0 0 h3 l2 12 h12 l2 -8 h-15"/>
           <circle cx="7" cy="17" r="1.7" fill="url(#icbGold)" stroke="none"/>
@@ -209,6 +200,7 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
       <button class="ib" id="themeBtn" title="Tema">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
+      <button class="ib curBtn" id="currencyBtn" title="Cambiar moneda (CUP / USD)">CUP</button>
       <button class="ib" id="cartBtn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span class="bg hide" id="cartCount">0</span>
@@ -323,7 +315,7 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
         </div>
         <div class="rw">
           <div class="fl"><label>Nombre *</label><input class="in" id="pName" required maxlength="80"></div>
-          <div class="fl"><label>Precio *</label><input class="in" id="pPrice" type="number" min="0" step="0.01" required></div>
+          <div class="fl"><label>Precio (CUP) *</label><input class="in" id="pPrice" type="number" min="0" step="0.01" required placeholder="Ej. 700"></div>
         </div>
         <div class="rw">
           <div class="fl"><label>Categoria</label><input class="in" id="pCategory" maxlength="40"></div>
@@ -336,7 +328,7 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
           <div class="fl"><label>Umbral stock bajo</label><input class="in" id="pLowStock" type="number" min="0" step="1" value="5"></div>
         </div>
         <div class="rw">
-          <div class="fl"><label>Precio anterior (oferta)</label><input class="in" id="pOldPrice" type="number" min="0" step="0.01" placeholder="Opcional"></div>
+          <div class="fl"><label>Precio anterior (CUP) (oferta)</label><input class="in" id="pOldPrice" type="number" min="0" step="0.01" placeholder="Opcional"></div>
           <div class="fl"><label>Destacar</label><select class="in" id="pFeatured"><option value="false">Normal</option><option value="true">Destacado</option></select></div>
         </div>
         <div class="fl"><label>Descripcion</label><textarea class="in" id="pDesc" maxlength="500"></textarea></div>
@@ -363,7 +355,7 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
         <div class="fl"><label>WhatsApp (solo numeros)</label><input class="in" id="cfgWhatsapp" inputmode="numeric" placeholder="5215512345678"></div>
       </div>
       <div class="rw">
-        <div class="fl"><label>Moneda</label><input class="in" id="cfgMoneda" maxlength="4" value="$"></div>
+        <div class="fl"><label>Tasa de cambio (1 USD = ? CUP) *</label><input class="in" id="cfgTasaCup" type="number" min="0.01" step="0.01" value="700" placeholder="Ej. 700"></div>
         <div class="fl"><label>Productos por pagina</label><input class="in" id="cfgPageSize" type="number" min="6" max="60" value="12"></div>
       </div>
       <div class="fl"><label>Umbral global stock bajo</label><input class="in" id="cfgStockBajo" type="number" min="0" value="5"></div>
@@ -407,19 +399,42 @@ function toast(m,ms){ms=ms||2400;var e=document.createElement('div');e.className
 var supa=null;
 var state=null;
 
+/* ====== FORMATEO DE MONEDA (base: CUP) ====== */
+function fmtNum(n){n=Number(n)||0;return Number.isInteger(n)?n.toString():n.toFixed(2);}
+function fmtCUP(n){return fmtNum(n)+' CUP';}
+function fmtPrice(cupAmount){
+  var n=Number(cupAmount)||0;
+  if(state && state.currency==='USD'){
+    var rate=(state.config&&state.config.tasaCup>0)?state.config.tasaCup:1;
+    return fmtNum(n/rate)+' USD';
+  }
+  return fmtNum(n)+' CUP';
+}
+function updateCurrencyBtn(){
+  var b=document.getElementById('currencyBtn');
+  if(b) b.textContent = (state&&state.currency)||'CUP';
+}
+
 async function iniciarApp(){
   try{supa=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);}
   catch(e){showError('No se pudo crear cliente: '+e.message);return;}
 
-  state={config:{tienda:'Mi Tienda',whatsapp:'',moneda:'$',pageSize:12,stockBajo:5},products:[],cart:[],filter:'all',typeFilter:'all',search:'',editingId:null,pendingImage:null,isAdmin:false,visibleCount:12};
+  state={config:{tienda:'Mi Tienda',whatsapp:'',pageSize:12,stockBajo:5,tasaCup:700},products:[],cart:[],filter:'all',typeFilter:'all',search:'',editingId:null,pendingImage:null,isAdmin:false,visibleCount:12,currency:'CUP'};
   try{state.cart=JSON.parse(localStorage.getItem('cart')||'[]');}catch(e){}
+  try{var savedCur=localStorage.getItem('currency');if(savedCur==='USD'||savedCur==='CUP')state.currency=savedCur;}catch(e){}
 
   document.getElementById('year').textContent=new Date().getFullYear();
 
   try{
     var r=await supa.from('configuracion').select('*').eq('id',1).maybeSingle();
     if(r.data){
-      state.config={tienda:r.data.tienda||'Mi Tienda',whatsapp:r.data.whatsapp||'',moneda:r.data.moneda||'$',pageSize:r.data.page_size||12,stockBajo:r.data.stock_bajo||5};
+      state.config={
+        tienda:r.data.tienda||'Mi Tienda',
+        whatsapp:r.data.whatsapp||'',
+        pageSize:r.data.page_size||12,
+        stockBajo:r.data.stock_bajo||5,
+        tasaCup:Number(r.data.tasa_cup)>0?Number(r.data.tasa_cup):700
+      };
       state.visibleCount=state.config.pageSize;
     }
   }catch(e){console.warn(e);}
@@ -429,6 +444,7 @@ async function iniciarApp(){
   try{var s=await supa.auth.getSession();if(s.data&&s.data.session){state.isAdmin=true;document.getElementById('adminEmailLabel').textContent=s.data.session.user.email||'';}}catch(e){}
 
   updateAdminAccess();
+  updateCurrencyBtn();
   renderTodo();
   bindEventos();
 }
@@ -452,7 +468,8 @@ function cardHTML(p,i){
   var badges=(service?'<span class="badge2 sv">Servicio</span>':'<span class="badge2">Producto</span>')+(Number(p.precio_anterior)>Number(p.precio)?'<span class="badge2 of">Oferta</span>':'')+(p.destacado?'<span class="badge2 fe">Destacado</span>':'');
   var status=service?'<span class="sb2 ok">Disponible</span>':(out?'<span class="sb2 ag">AGOTADO</span>':s==='low'?'<span class="sb2 lo">Quedan '+p.stock+'</span>':'<span class="sb2 ok">'+p.stock+' disp.</span>');
   var actions=service?'<button class="bt bw" data-action="ask" data-id="'+p.id+'">Solicitar</button>':(out?'<span class="om">Producto agotado</span>':'<button class="bt bp" data-action="add" data-id="'+p.id+'">Anadir</button>');
-  return '<article class="cd '+(out?'ag':'')+'" style="animation-delay:'+Math.min(i*25,300)+'ms"><div class="ci">'+badges+status+'<img src="'+img+'" alt="'+esc(p.nombre)+'" loading="lazy" decoding="async"></div><div class="cb"><h3 class="ct">'+esc(p.nombre)+'</h3>'+(p.descripcion?'<p class="cd2">'+esc(p.descripcion)+'</p>':'')+(p.duracion?'<div class="service-note">'+esc(p.duracion)+'</div>':'')+'<div class="cpr '+(out?'st':'')+'">'+state.config.moneda+Number(p.precio).toFixed(2)+(Number(p.precio_anterior)>Number(p.precio)?'<span class="oldprice">'+state.config.moneda+Number(p.precio_anterior).toFixed(2)+'</span>':'')+'</div><div class="ca">'+actions+'<button class="bt bg2" data-action="ask" data-id="'+p.id+'">Info</button></div></div></article>';
+  var oldP=Number(p.precio_anterior)>Number(p.precio)?'<span class="oldprice">'+fmtPrice(p.precio_anterior)+'</span>':'';
+  return '<article class="cd '+(out?'ag':'')+'" style="animation-delay:'+Math.min(i*25,300)+'ms"><div class="ci">'+badges+status+'<img src="'+img+'" alt="'+esc(p.nombre)+'" loading="lazy" decoding="async"></div><div class="cb"><h3 class="ct">'+esc(p.nombre)+'</h3>'+(p.descripcion?'<p class="cd2">'+esc(p.descripcion)+'</p>':'')+(p.duracion?'<div class="service-note">'+esc(p.duracion)+'</div>':'')+'<div class="cpr '+(out?'st':'')+'">'+fmtPrice(p.precio)+oldP+'</div><div class="ca">'+actions+'<button class="bt bg2" data-action="ask" data-id="'+p.id+'">Info</button></div></div></article>';
 }
 
 function renderGrid(reset){
@@ -482,7 +499,7 @@ function renderAdminList(){
       '<img src="'+esc(p.imagen||'')+'" alt="">'+
       '<div style="flex:1;min-width:0">'+
       '<div class="an">'+esc(p.nombre)+'</div>'+
-      '<div class="am">'+state.config.moneda+Number(p.precio).toFixed(2)+' - '+esc(p.categoria||'General')+' - '+tag+(p.visible===false?' - <span class="to">Oculto</span>':'')+'</div>'+
+      '<div class="am">'+fmtCUP(p.precio)+' - '+esc(p.categoria||'General')+' - '+tag+(p.visible===false?' - <span class="to">Oculto</span>':'')+'</div>'+
       '</div>'+
       '<button class="ib" data-admin="edit" data-id="'+p.id+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>'+
       '<button class="ib" data-admin="del" data-id="'+p.id+'" style="color:#ef4444"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>'+
@@ -527,7 +544,7 @@ function renderCart(){
       '<img src="'+esc(p.imagen||'')+'" alt="">'+
       '<div class="cin2">'+
       '<div class="cn">'+esc(p.nombre)+'</div>'+
-      '<div class="cp2">'+state.config.moneda+sub.toFixed(2)+'</div>'+
+      '<div class="cp2">'+fmtPrice(sub)+'</div>'+
       '<div class="qt">'+
       '<button data-cart="dec" data-id="'+p.id+'">-</button>'+
       '<span>'+item.qty+'</span>'+
@@ -536,7 +553,7 @@ function renderCart(){
       '<button class="cdl" data-cart="del" data-id="'+p.id+'">X</button>'+
       '</div>';
   }).join('');
-  foot.innerHTML='<div class="tt"><span>Total</span><strong>'+state.config.moneda+total.toFixed(2)+'</strong></div>'+
+  foot.innerHTML='<div class="tt"><span>Total</span><strong>'+fmtPrice(total)+'</strong></div>'+
     '<button class="bt bw bblk" id="checkoutBtn">Finalizar pedido por WhatsApp</button>'+
     '<button class="bt bg2 bblk bsm" id="clearCartBtn">Vaciar carrito</button>';
 }
@@ -549,6 +566,7 @@ function renderTodo(){
   var wa=state.config.whatsapp?'https://wa.me/'+cleanPhone(state.config.whatsapp)+'?text='+encodeURIComponent(msg):'#';
   document.getElementById('waFloat').href=wa;
   document.getElementById('heroWa').href=wa;
+  updateCurrencyBtn();
   renderChips();
   renderGrid(true);
   renderCart();
@@ -596,9 +614,9 @@ async function checkout(){
     var p=fresh.filter(function(x){return x.id===item.id;})[0];
     if(!p||p.tipo==='servicio'||p.stock<item.qty){toast('Producto sin stock suficiente');await recargarProductos();return;}
   }
-  var lines=state.cart.map(function(i){var p=fresh.filter(function(x){return x.id===i.id;})[0];return '- '+i.qty+' x '+p.nombre+' - '+state.config.moneda+(Number(p.precio)*i.qty).toFixed(2);});
+  var lines=state.cart.map(function(i){var p=fresh.filter(function(x){return x.id===i.id;})[0];return '- '+i.qty+' x '+p.nombre+' - '+fmtPrice(Number(p.precio)*i.qty);});
   var total=state.cart.reduce(function(s,i){var p=fresh.filter(function(x){return x.id===i.id;})[0];return s+Number(p.precio)*i.qty;},0);
-  var msg='Hola '+state.config.tienda+', quiero pedir:\n\n'+lines.join('\n')+'\n\nTotal: '+state.config.moneda+total.toFixed(2)+'\n\nPor favor confirma disponibilidad y total final.';
+  var msg='Hola '+state.config.tienda+', quiero pedir:\n\n'+lines.join('\n')+'\n\nTotal: '+fmtPrice(total)+'\n\nPor favor confirma disponibilidad y total final.';
   window.open('https://wa.me/'+cleanPhone(state.config.whatsapp)+'?text='+encodeURIComponent(msg),'_blank');
   toast('Pedido preparado. Confirma por WhatsApp.');
 }
@@ -608,7 +626,7 @@ function askProduct(id){
   if(!p)return;
   if(!state.config.whatsapp)return toast('WhatsApp no configurado');
   var stockTxt=p.stock>0?'Disponibles: '+p.stock:'Agotado';
-  var msg='Hola, me interesa:\n'+p.nombre+' - '+state.config.moneda+Number(p.precio).toFixed(2)+'\n'+stockTxt;
+  var msg='Hola, me interesa:\n'+p.nombre+' - '+fmtPrice(p.precio)+'\n'+stockTxt;
   window.open('https://wa.me/'+cleanPhone(state.config.whatsapp)+'?text='+encodeURIComponent(msg),'_blank');
 }
 
@@ -621,11 +639,6 @@ async function recargarProductos(){
   if(state.isAdmin){renderAdminList();renderLowStockAlert();}
 }
 
-/* Acceso admin: el boton de configuracion esta oculto para el publico.
-   Se muestra solo si hay una sesion de administrador activa, o si la URL
-   trae ?admin (o #admin) para poder iniciar sesion la primera vez desde
-   un dispositivo nuevo. Tras iniciar sesion, el navegador recuerda la
-   sesion y el boton seguira apareciendo sin necesidad del parametro. */
 function isAdminEntry(){
   return /(^|[?&])admin(=|&|$)/i.test(location.search)||/(^|#)admin$/i.test(location.hash);
 }
@@ -651,7 +664,7 @@ function closeAdmin(){document.getElementById('adminModal').classList.remove('op
 function fillConfigForm(){
   document.getElementById('cfgTienda').value=state.config.tienda;
   document.getElementById('cfgWhatsapp').value=state.config.whatsapp;
-  document.getElementById('cfgMoneda').value=state.config.moneda;
+  document.getElementById('cfgTasaCup').value=state.config.tasaCup;
   document.getElementById('cfgPageSize').value=state.config.pageSize;
   document.getElementById('cfgStockBajo').value=state.config.stockBajo;
 }
@@ -710,6 +723,14 @@ function bindEventos(){
     var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
     document.documentElement.setAttribute('data-theme',n);
     try{localStorage.setItem('theme',n);}catch(e){}
+  };
+
+  document.getElementById('currencyBtn').onclick=function(){
+    state.currency = state.currency==='USD' ? 'CUP' : 'USD';
+    try{localStorage.setItem('currency',state.currency);}catch(e){}
+    updateCurrencyBtn();
+    renderTodo();
+    toast('Precios en '+state.currency);
   };
 
   document.getElementById('grid').onclick=function(e){
@@ -870,12 +891,26 @@ function bindEventos(){
 
   document.getElementById('saveConfigBtn').onclick=async function(){
     if(!state.isAdmin)return;
-    var cfg={tienda:document.getElementById('cfgTienda').value.trim()||'Mi Tienda',whatsapp:cleanPhone(document.getElementById('cfgWhatsapp').value),moneda:document.getElementById('cfgMoneda').value.trim()||'$',page_size:Math.min(60,Math.max(6,parseInt(document.getElementById('cfgPageSize').value)||12)),stock_bajo:Math.max(0,parseInt(document.getElementById('cfgStockBajo').value)||5)};
+    var tasa=parseFloat(document.getElementById('cfgTasaCup').value);
+    if(!tasa||tasa<=0)return toast('Tasa de cambio invalida');
+    var cfg={
+      tienda:document.getElementById('cfgTienda').value.trim()||'Mi Tienda',
+      whatsapp:cleanPhone(document.getElementById('cfgWhatsapp').value),
+      page_size:Math.min(60,Math.max(6,parseInt(document.getElementById('cfgPageSize').value)||12)),
+      stock_bajo:Math.max(0,parseInt(document.getElementById('cfgStockBajo').value)||5),
+      tasa_cup:tasa
+    };
     var b=this;b.disabled=true;
     var r=await supa.from('configuracion').update(cfg).eq('id',1);
     b.disabled=false;
     if(r.error){showError(r.error.message);return toast('Error: '+r.error.message);}
-    state.config={tienda:cfg.tienda,whatsapp:cfg.whatsapp,moneda:cfg.moneda,pageSize:cfg.page_size,stockBajo:cfg.stock_bajo};
+    state.config={
+      tienda:cfg.tienda,
+      whatsapp:cfg.whatsapp,
+      pageSize:cfg.page_size,
+      stockBajo:cfg.stock_bajo,
+      tasaCup:cfg.tasa_cup
+    };
     state.visibleCount=cfg.page_size;
     toast('Configuracion guardada');
     renderTodo();
