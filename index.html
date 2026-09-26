@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mi Tienda</title>
+<meta name="description" content="Compra los mejores productos. Pide facil por WhatsApp.">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--bg:#f6f7fb;--sf:#fff;--sf2:#f0f1f7;--tx:#101322;--mu:#6b7280;--bd:rgba(16,19,34,.09);--pr:#6d28d9;--pr2:#4f46e5;--ac:#06b6d4;--wa:#25D366;--dg:#ef4444;--wn:#f59e0b;--sh:0 10px 30px rgba(16,19,34,.09);--rd:18px;--hb:rgba(246,247,251,.85)}
@@ -367,15 +368,19 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
 <div class="ebn" id="errBanner"></div>
 
 <script>
-var logEl = document.getElementById('debugLog');
+/* ============================================================
+   >>>>>>>>>>>  CONFIGURACION  <<<<<<<<<<<
+   Solo cambia el valor de SUPABASE_ANON_KEY por tu clave real
+   ============================================================ */
+var SUPABASE_URL='https://cokur1jtatazsfznvoo.supabase.co';
+var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNva3VyamxqdGF0YXpzZnpudm9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMDAzOTMsImV4cCI6MjEwNTg3NjM5M30.lE8u-auwd2WN3Xka0exWp77IQFHyJsNOk1h-2s-Ns28';
+/* ============================================================ */
+
+var logEl=document.getElementById('debugLog');
 function log(m,t){t=t||'in';var d=document.createElement('div');d.className=t;d.textContent='['+new Date().toLocaleTimeString()+'] '+m;logEl.appendChild(d);logEl.scrollTop=logEl.scrollHeight;}
 function showError(m){var b=document.getElementById('errBanner');b.textContent=m;b.classList.add('sh');setTimeout(function(){b.classList.remove('sh');},6000);log('ERROR: '+m,'er');}
 window.onerror=function(m,s,l){showError(m+' (linea '+l+')');return false;};
 document.getElementById('debugToggle').onclick=function(){logEl.classList.toggle('sh');};
-
-var SUPABASE_URL='';
-var SUPABASE_ANON_KEY='';
-try{SUPABASE_URL=localStorage.getItem('supa_url')||'';SUPABASE_ANON_KEY=localStorage.getItem('supa_key')||'';}catch(e){}
 
 var $=function(s){return document.querySelector(s);};
 var $$=function(s){return [].slice.call(document.querySelectorAll(s));};
@@ -391,11 +396,6 @@ var state=null;
 function mostrarSetup(){
   document.getElementById('setup').hidden=false;
   document.getElementById('app').hidden=true;
-  if(SUPABASE_URL&&SUPABASE_ANON_KEY){
-    document.getElementById('setupUrl').value=SUPABASE_URL;
-    document.getElementById('setupKey').value=SUPABASE_ANON_KEY;
-    document.getElementById('setupReset').hidden=false;
-  }
 }
 
 document.getElementById('setupSave').onclick=function(){
@@ -411,14 +411,13 @@ document.getElementById('setupSave').onclick=function(){
 document.getElementById('setupReset').onclick=function(){
   if(!confirm('Borrar credenciales?'))return;
   localStorage.removeItem('supa_url');localStorage.removeItem('supa_key');
-  document.getElementById('setupUrl').value='';
-  document.getElementById('setupKey').value='';
-  document.getElementById('setupReset').hidden=true;
-  toast('Credenciales borradas');
+  location.reload();
 };
 
 async function iniciarApp(){
-  if(!SUPABASE_URL||!SUPABASE_ANON_KEY){mostrarSetup();return;}
+  if(!SUPABASE_URL||!SUPABASE_ANON_KEY||SUPABASE_ANON_KEY.indexOf('PEGA_AQUI')===0){
+    mostrarSetup();return;
+  }
   document.getElementById('setup').hidden=true;
   document.getElementById('app').hidden=false;
   try{supa=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);log('Cliente Supabase OK','ok');}
@@ -805,7 +804,7 @@ function bindEventos(){
   };
 
   document.getElementById('changeSetup').onclick=function(){
-    if(confirm('Esto borrara tus credenciales. Continuar?')){
+    if(confirm('Esto borrara tus credenciales guardadas. La web seguira funcionando con las de fabrica. Continuar?')){
       localStorage.removeItem('supa_url');localStorage.removeItem('supa_key');
       location.reload();
     }
@@ -897,8 +896,7 @@ function bindEventos(){
     var t=localStorage.getItem('theme');
     if(t)document.documentElement.setAttribute('data-theme',t);
   }catch(e){}
-  if(!SUPABASE_URL||!SUPABASE_ANON_KEY)mostrarSetup();
-  else iniciarApp();
+  iniciarApp();
 })();
 </script>
 </body>
