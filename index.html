@@ -232,9 +232,35 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
 .revStats .s{color:#f59e0b;font-size:1rem;margin-top:.2rem;display:block}
 .revStats small{display:block;color:var(--mu);font-size:.75rem;margin-top:.3rem}
 
+/* ===== SECCIONES DEL PANEL ADMIN ===== */
+.adminSection{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:1.2rem 1.3rem 1.3rem;margin-bottom:1.2rem;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+[data-theme="dark"] .adminSection{box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.adminSection.gold{border-left:4px solid #F0B429}
+.adminSection.purple{border-left:4px solid var(--pr)}
+.adminSection.blue{border-left:4px solid var(--ac)}
+.adminSection.green{border-left:4px solid #10b981}
+.adminSection.orange{border-left:4px solid var(--wn)}
+.adminSection.red{border-left:4px solid var(--dg)}
+.adminSection.gray{border-left:4px solid var(--mu)}
+.adminSectionHead{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid var(--bd)}
+.adminSectionHead .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;color:#fff;font-size:1.1rem}
+.adminSectionHead .ico.gold{background:linear-gradient(135deg,#FFD84D,#C87F0A)}
+.adminSectionHead .ico.purple{background:linear-gradient(135deg,var(--pr),var(--pr2))}
+.adminSectionHead .ico.blue{background:linear-gradient(135deg,var(--ac),#0891b2)}
+.adminSectionHead .ico.green{background:linear-gradient(135deg,#34d399,#059669)}
+.adminSectionHead .ico.orange{background:linear-gradient(135deg,#fbbf24,#d97706)}
+.adminSectionHead .ico.red{background:linear-gradient(135deg,#f87171,#dc2626)}
+.adminSectionHead .ico.gray{background:linear-gradient(135deg,#9ca3af,#4b5563)}
+.adminSectionHead h4{font-size:.95rem;font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.adminSectionHead p{font-size:.75rem;color:var(--mu);margin-top:.1rem}
+.adminSectionHead .ico+div{flex:1;min-width:0}
+.adminSection .st2{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--bd);font-size:.7rem}
+.adminSection .st2:first-of-type{margin-top:0;padding-top:0;border-top:0}
+.dash.tight{margin:0 0 .9rem}
+
 @media (max-width:860px){.rw{grid-template-columns:1fr}.hero{padding:3rem 0 2.5rem}}
 @media (max-width:700px){.dash{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:520px){.gr2{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.9rem}.ca{flex-direction:column}.sb{min-width:0;width:100%}.mb{padding:1.2rem}.nv{height:60px}.brandLogo{height:38px}.wf{width:52px;height:52px;bottom:1rem;right:1rem}.recentRow{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem}.catsGrid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:.5rem}.catCard b{font-size:.7rem;padding:.35rem .2rem}}
+@media (max-width:520px){.gr2{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.9rem}.ca{flex-direction:column}.sb{min-width:0;width:100%}.mb{padding:1rem}.nv{height:60px}.brandLogo{height:38px}.wf{width:52px;height:52px;bottom:1rem;right:1rem}.recentRow{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.6rem}.catsGrid{grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:.5rem}.catCard b{font-size:.7rem;padding:.35rem .2rem}.adminSection{padding:1rem}}
 </style>
 </head>
 <body>
@@ -390,149 +416,208 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
       <div class="fl"><label>Contrasena</label><input class="in" id="adminPass" type="password"></div>
       <div class="ma"><button class="bt bg2" data-close-modal>Cancelar</button><button class="bt bp" id="loginBtn">Entrar</button></div>
     </div>
+
     <div id="panelView" hidden>
       <div class="ph">
-        <div><h3>Panel de administracion</h3><p class="mu" style="font-size:.8rem" id="adminEmailLabel"></p></div>
+        <div>
+          <h3>Panel de administración</h3>
+          <p class="mu" style="font-size:.8rem" id="adminEmailLabel"></p>
+        </div>
         <button class="ib" data-close-modal><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
       </div>
+
       <div id="lowStockAlert"></div>
-      <div class="dash">
-        <div class="stat"><b id="statTotal">0</b><span>Publicaciones</span></div>
-        <div class="stat"><b id="statProducts">0</b><span>Productos</span></div>
-        <div class="stat"><b id="statServices">0</b><span>Servicios</span></div>
-        <div class="stat"><b id="statLow">0</b><span>Stock bajo</span></div>
+
+      <!-- ===== RESUMEN ===== -->
+      <div class="adminSection gray">
+        <div class="adminSectionHead">
+          <div class="ico gray">📊</div>
+          <div><h4>Resumen</h4><p>Estado general de tu tienda</p></div>
+        </div>
+        <div class="dash tight">
+          <div class="stat"><b id="statTotal">0</b><span>Publicaciones</span></div>
+          <div class="stat"><b id="statProducts">0</b><span>Productos</span></div>
+          <div class="stat"><b id="statServices">0</b><span>Servicios</span></div>
+          <div class="stat"><b id="statLow">0</b><span>Stock bajo</span></div>
+        </div>
       </div>
-      <form id="productForm">
-        <input type="hidden" id="productId">
-        <div class="rw">
-          <div class="fl"><label>Tipo *</label><select class="in" id="pType"><option value="producto">Producto</option><option value="servicio">Servicio</option></select></div>
-          <div class="fl"><label>Duracion / modalidad</label><input class="in" id="pDuration" maxlength="60" placeholder="Ej. 60 min"></div>
+
+      <!-- ===== CREAR / EDITAR PRODUCTO ===== -->
+      <div class="adminSection purple">
+        <div class="adminSectionHead">
+          <div class="ico purple">📦</div>
+          <div><h4 id="formTitle">Publicar producto</h4><p id="formSubtitle">Crea un nuevo producto o servicio</p></div>
         </div>
-        <div class="fl"><label>Nombre *</label><input class="in" id="pName" required maxlength="80"></div>
-        <div class="fl">
-          <label>Presentacion / Empaque</label>
-          <input class="in" id="pPresentacion" maxlength="40" placeholder="Ej. Caja x24, Blister x6, Botella 1L...">
-          <small>Opcional. Aparecera como etiqueta en la tarjeta del producto.</small>
-        </div>
-        <div class="rw">
+        <form id="productForm">
+          <input type="hidden" id="productId">
+          <div class="rw">
+            <div class="fl"><label>Tipo *</label><select class="in" id="pType"><option value="producto">Producto</option><option value="servicio">Servicio</option></select></div>
+            <div class="fl"><label>Duración / modalidad</label><input class="in" id="pDuration" maxlength="60" placeholder="Ej. 60 min"></div>
+          </div>
+          <div class="fl"><label>Nombre *</label><input class="in" id="pName" required maxlength="80"></div>
           <div class="fl">
-            <label>Precio *</label>
-            <div class="priceRow">
-              <input class="in" id="pPrice" type="number" min="0" step="0.01" required>
-              <select class="in notranslate" id="pPriceCurrency" translate="no"><option value="CUP">CUP</option><option value="USD">USD</option></select>
-            </div>
-            <small id="pPricePreview" class="notranslate" translate="no"></small>
+            <label>Presentación / Empaque</label>
+            <input class="in" id="pPresentacion" maxlength="40" placeholder="Ej. Caja x24, Blíster x6, Botella 1L...">
+            <small>Opcional. Aparecerá como etiqueta en la tarjeta del producto.</small>
           </div>
-          <div class="fl"><label>Categoria</label><input class="in" id="pCategory" maxlength="40"></div>
-        </div>
-        <div class="rw">
-          <div class="fl"><label>Stock *</label><input class="in" id="pStock" type="number" min="0" step="1" required value="10"></div>
-          <div class="fl"><label>Estado</label><select class="in" id="pVisible"><option value="true">Visible</option><option value="false">Oculto</option></select></div>
-        </div>
-        <div class="rw">
-          <div class="fl"><label>Umbral stock bajo</label><input class="in" id="pLowStock" type="number" min="0" step="1" value="5"></div>
-          <div class="fl"><label>Destacar</label><select class="in" id="pFeatured"><option value="false">Normal</option><option value="true">Destacado</option></select></div>
-        </div>
-        <div class="rw">
-          <div class="fl"><label>Precio anterior (oferta)</label><input class="in" id="pOldPrice" type="number" min="0" step="0.01" placeholder="Opcional"></div>
-          <div class="fl"><label>Oferta termina</label><input class="in" id="pOfertaFin" type="datetime-local"><small>Opcional. Muestra cuenta regresiva.</small></div>
-        </div>
-        <div class="fl"><label>Ventas registradas</label><input class="in" id="pVentas" type="number" min="0" value="0"></div>
-        <div class="fl"><label>Descripcion</label><textarea class="in" id="pDesc" maxlength="500"></textarea></div>
-        <div class="fl">
-          <label>Imagen</label>
-          <div class="ir">
-            <img class="pv" id="pPreview" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72'><rect width='72' height='72' fill='%23e5e7eb'/></svg>">
-            <div style="flex:1;display:flex;flex-direction:column;gap:.5rem">
-              <label class="fd" for="pFile">Subir imagen (max 3 MB)<input type="file" id="pFile" accept="image/*"></label>
-              <input class="in" id="pImageUrl" placeholder="...o pega una URL https://">
+          <div class="rw">
+            <div class="fl">
+              <label>Precio *</label>
+              <div class="priceRow">
+                <input class="in" id="pPrice" type="number" min="0" step="0.01" required>
+                <select class="in notranslate" id="pPriceCurrency" translate="no"><option value="CUP">CUP</option><option value="USD">USD</option></select>
+              </div>
+              <small id="pPricePreview" class="notranslate" translate="no"></small>
+            </div>
+            <div class="fl"><label>Categoría</label><input class="in" id="pCategory" maxlength="40"></div>
+          </div>
+          <div class="rw">
+            <div class="fl"><label>Stock *</label><input class="in" id="pStock" type="number" min="0" step="1" required value="10"></div>
+            <div class="fl"><label>Estado</label><select class="in" id="pVisible"><option value="true">Visible</option><option value="false">Oculto</option></select></div>
+          </div>
+          <div class="rw">
+            <div class="fl"><label>Umbral stock bajo</label><input class="in" id="pLowStock" type="number" min="0" step="1" value="5"></div>
+            <div class="fl"><label>Destacar</label><select class="in" id="pFeatured"><option value="false">Normal</option><option value="true">Destacado</option></select></div>
+          </div>
+          <div class="rw">
+            <div class="fl"><label>Precio anterior (oferta)</label><input class="in" id="pOldPrice" type="number" min="0" step="0.01" placeholder="Opcional"></div>
+            <div class="fl"><label>Oferta termina</label><input class="in" id="pOfertaFin" type="datetime-local"><small>Opcional. Muestra cuenta regresiva.</small></div>
+          </div>
+          <div class="fl"><label>Ventas registradas</label><input class="in" id="pVentas" type="number" min="0" value="0"></div>
+          <div class="fl"><label>Descripción</label><textarea class="in" id="pDesc" maxlength="500"></textarea></div>
+          <div class="fl">
+            <label>Imagen</label>
+            <div class="ir">
+              <img class="pv" id="pPreview" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72'><rect width='72' height='72' fill='%23e5e7eb'/></svg>">
+              <div style="flex:1;display:flex;flex-direction:column;gap:.5rem">
+                <label class="fd" for="pFile">Subir imagen (máx 3 MB)<input type="file" id="pFile" accept="image/*"></label>
+                <input class="in" id="pImageUrl" placeholder="...o pega una URL https://">
+              </div>
             </div>
           </div>
+          <div class="ma">
+            <button type="button" class="bt bg2 bsm" id="cancelEdit" hidden>Cancelar edición</button>
+            <button type="submit" class="bt bp" id="saveBtn">Publicar producto</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ===== LISTA DE PRODUCTOS ===== -->
+      <div class="adminSection blue">
+        <div class="adminSectionHead">
+          <div class="ico blue">🗂️</div>
+          <div><h4>Productos publicados (<span id="adminCount">0</span>)</h4><p>Edita, marca venta o elimina</p></div>
+        </div>
+        <div class="al" id="adminList" style="margin-top:0"></div>
+      </div>
+
+      <!-- ===== CATEGORIAS ===== -->
+      <div class="adminSection green">
+        <div class="adminSectionHead">
+          <div class="ico green">🏷️</div>
+          <div><h4>Categorías visuales</h4><p>Aparecen como cuadrícula en el catálogo</p></div>
+        </div>
+        <form id="catForm" style="background:var(--sf2);padding:.9rem;border-radius:14px">
+          <input type="hidden" id="catId">
+          <div class="rw">
+            <div class="fl"><label>Nombre *</label><input class="in" id="catName" required maxlength="30"></div>
+            <div class="fl"><label>Orden</label><input class="in" id="catOrden" type="number" value="0"></div>
+          </div>
+          <div class="fl">
+            <label>Imagen de la categoría</label>
+            <div class="ir">
+              <img class="pv" id="catPreview" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72'><rect width='72' height='72' fill='%23e5e7eb'/></svg>">
+              <div style="flex:1;display:flex;flex-direction:column;gap:.5rem">
+                <label class="fd" for="catFile">Subir imagen<input type="file" id="catFile" accept="image/*"></label>
+                <input class="in" id="catImageUrl" placeholder="o URL https://">
+              </div>
+            </div>
+          </div>
+          <div class="ma" style="justify-content:flex-start">
+            <button type="button" class="bt bg2 bsm" id="catCancel" hidden>Cancelar</button>
+            <button type="submit" class="bt bp bsm" id="catSaveBtn">Agregar categoría</button>
+          </div>
+        </form>
+        <div class="st2">Categorías creadas</div>
+        <div class="al" id="catList" style="margin-top:0"></div>
+      </div>
+
+      <!-- ===== RESEÑAS ===== -->
+      <div class="adminSection orange">
+        <div class="adminSectionHead">
+          <div class="ico orange">⭐</div>
+          <div><h4>Reseñas recientes (<span id="revCount">0</span>)</h4><p>Opiniones de tus clientes</p></div>
+        </div>
+        <div class="al" id="revAdminList" style="margin-top:0"></div>
+      </div>
+
+      <!-- ===== CONFIGURACION DE LA TIENDA ===== -->
+      <div class="adminSection gold">
+        <div class="adminSectionHead">
+          <div class="ico gold">⚙️</div>
+          <div><h4>Configuración de la tienda</h4><p>Datos generales, moneda y envíos</p></div>
+        </div>
+        <div class="rw">
+          <div class="fl"><label>Nombre de la tienda</label><input class="in" id="cfgTienda" maxlength="40"></div>
+          <div class="fl"><label>WhatsApp (solo números)</label><input class="in" id="cfgWhatsapp" inputmode="numeric" placeholder="5355555555"></div>
+        </div>
+        <div class="rw">
+          <div class="fl"><label>Tasa de cambio (1 USD = ? CUP) *</label><input class="in" id="cfgTasaCup" type="number" min="0.01" step="0.01" value="700"></div>
+          <div class="fl"><label>Productos por página</label><input class="in" id="cfgPageSize" type="number" min="6" max="60" value="12"></div>
+        </div>
+        <div class="rw">
+          <div class="fl"><label>Envío gratis a partir de (CUP)</label><input class="in" id="cfgEnvioGratis" type="number" min="0" step="1" value="0"><small>0 = desactivado</small></div>
+          <div class="fl"><label>Umbral global stock bajo</label><input class="in" id="cfgStockBajo" type="number" min="0" value="5"></div>
         </div>
         <div class="ma">
-          <button type="button" class="bt bg2 bsm" id="cancelEdit" hidden>Cancelar edicion</button>
-          <button type="submit" class="bt bp" id="saveBtn">Publicar producto</button>
+          <button class="bt bp" id="saveConfigBtn">Guardar configuración</button>
         </div>
-      </form>
-      <div class="st2">Productos publicados (<span id="adminCount">0</span>)</div>
-      <div class="al" id="adminList"></div>
+      </div>
 
-      <div class="st2">Categorias visuales</div>
-      <form id="catForm" style="background:var(--sf2);padding:.9rem;border-radius:14px">
-        <input type="hidden" id="catId">
-        <div class="rw">
-          <div class="fl"><label>Nombre *</label><input class="in" id="catName" required maxlength="30"></div>
-          <div class="fl"><label>Orden</label><input class="in" id="catOrden" type="number" value="0"></div>
+      <!-- ===== CREDENCIALES ===== -->
+      <div class="adminSection red">
+        <div class="adminSectionHead">
+          <div class="ico red">🔐</div>
+          <div><h4>Mis credenciales</h4><p>Cambia tu correo o contraseña de acceso</p></div>
         </div>
-        <div class="fl">
-          <label>Imagen de la categoria</label>
-          <div class="ir">
-            <img class="pv" id="catPreview" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72'><rect width='72' height='72' fill='%23e5e7eb'/></svg>">
-            <div style="flex:1;display:flex;flex-direction:column;gap:.5rem">
-              <label class="fd" for="catFile">Subir imagen<input type="file" id="catFile" accept="image/*"></label>
-              <input class="in" id="catImageUrl" placeholder="o URL https://">
-            </div>
+
+        <div class="al2 info" style="margin-bottom:1rem">
+          <div style="flex:1">
+            <b>Nota importante</b>
+            Al cambiar el correo, Supabase te enviará un mensaje al nuevo correo para confirmar el cambio. Debes hacer clic en ese enlace para que se aplique. El cambio de contraseña es inmediato.
           </div>
         </div>
-        <div class="ma" style="justify-content:flex-start">
-          <button type="button" class="bt bg2 bsm" id="catCancel" hidden>Cancelar</button>
-          <button type="submit" class="bt bp bsm" id="catSaveBtn">Agregar categoria</button>
+
+        <div class="st2">Cambiar correo</div>
+        <div class="fl">
+          <label>Correo actual</label>
+          <input class="in" id="accCurrentEmail" type="email" readonly style="opacity:.7;cursor:not-allowed">
         </div>
-      </form>
-      <div class="al" id="catList" style="margin-top:.9rem"></div>
+        <div class="rw">
+          <div class="fl"><label>Nuevo correo</label><input class="in" id="accNewEmail" type="email" placeholder="nuevo@email.com"></div>
+          <div class="fl"><label>Tu contraseña actual (para confirmar)</label><input class="in" id="accEmailPass" type="password" placeholder="********"></div>
+        </div>
+        <div class="ma" style="justify-content:flex-start;margin-top:0">
+          <button class="bt bp bsm" id="changeEmailBtn">Actualizar correo</button>
+        </div>
 
-      <div class="st2">Resenas recientes (<span id="revCount">0</span>)</div>
-      <div class="al" id="revAdminList"></div>
-
-      <div class="st2">Configuracion de la tienda</div>
-      <div class="rw">
-        <div class="fl"><label>Nombre de la tienda</label><input class="in" id="cfgTienda" maxlength="40"></div>
-        <div class="fl"><label>WhatsApp (solo numeros)</label><input class="in" id="cfgWhatsapp" inputmode="numeric" placeholder="5355555555"></div>
-      </div>
-      <div class="rw">
-        <div class="fl"><label>Tasa de cambio (1 USD = ? CUP) *</label><input class="in" id="cfgTasaCup" type="number" min="0.01" step="0.01" value="700"></div>
-        <div class="fl"><label>Productos por pagina</label><input class="in" id="cfgPageSize" type="number" min="6" max="60" value="12"></div>
-      </div>
-      <div class="rw">
-        <div class="fl"><label>Envio gratis a partir de (CUP)</label><input class="in" id="cfgEnvioGratis" type="number" min="0" step="1" value="0"><small>0 = desactivado</small></div>
-        <div class="fl"><label>Umbral global stock bajo</label><input class="in" id="cfgStockBajo" type="number" min="0" value="5"></div>
-      </div>
-      <div class="ma">
-        <button class="bt bp" id="saveConfigBtn">Guardar configuracion</button>
-      </div>
-
-      <div class="st2">Cambiar mis credenciales</div>
-      <div class="al2 info">
-        <div style="flex:1">
-          <b>Nota importante:</b>
-          Al cambiar el correo, Supabase te enviara un mensaje al nuevo correo para confirmar el cambio. Debes hacer clic en ese enlace para que se aplique.
-          El cambio de contrasena es inmediato.
+        <div class="st2">Cambiar contraseña</div>
+        <div class="rw">
+          <div class="fl"><label>Nueva contraseña</label><input class="in" id="accNewPass" type="password" placeholder="Mínimo 6 caracteres"></div>
+          <div class="fl"><label>Confirmar contraseña</label><input class="in" id="accNewPass2" type="password" placeholder="Repite la contraseña"></div>
+        </div>
+        <div class="ma" style="justify-content:flex-start;margin-top:0">
+          <button class="bt bp bsm" id="changePassBtn">Actualizar contraseña</button>
         </div>
       </div>
-      <div class="fl">
-        <label>Correo actual</label>
-        <input class="in" id="accCurrentEmail" type="email" readonly style="opacity:.7;cursor:not-allowed">
-      </div>
-      <div class="rw">
-        <div class="fl"><label>Nuevo correo</label><input class="in" id="accNewEmail" type="email" placeholder="nuevo@email.com"></div>
-        <div class="fl"><label>Tu contrasena actual (para confirmar)</label><input class="in" id="accEmailPass" type="password" placeholder="********"></div>
-      </div>
-      <div class="ma" style="justify-content:flex-start;margin-top:0">
-        <button class="bt bp bsm" id="changeEmailBtn">Actualizar correo</button>
+
+      <!-- ===== CERRAR SESION ===== -->
+      <div class="adminSection gray">
+        <div class="ma" style="justify-content:flex-start;margin-top:0">
+          <button class="bt bg2" id="logoutBtn">Cerrar sesión</button>
+        </div>
       </div>
 
-      <div class="st2" style="margin-top:1rem;border-top:0;padding-top:0"></div>
-      <div class="rw">
-        <div class="fl"><label>Nueva contrasena</label><input class="in" id="accNewPass" type="password" placeholder="Minimo 6 caracteres"></div>
-        <div class="fl"><label>Confirmar contrasena</label><input class="in" id="accNewPass2" type="password" placeholder="Repite la contrasena"></div>
-      </div>
-      <div class="ma" style="justify-content:flex-start;margin-top:0">
-        <button class="bt bp bsm" id="changePassBtn">Actualizar contrasena</button>
-      </div>
-
-      <div class="ma" style="justify-content:space-between;margin-top:1.5rem">
-        <button class="bt bg2 bsm" id="logoutBtn">Cerrar sesion</button>
-      </div>
     </div>
   </div>
 </div>
@@ -1075,6 +1160,8 @@ function resetForm(){
   document.getElementById('pPreview').src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72'><rect width='72' height='72' fill='%23e5e7eb'/></svg>";
   document.getElementById('saveBtn').textContent='Publicar producto';
   document.getElementById('cancelEdit').hidden=true;
+  document.getElementById('formTitle').textContent='Publicar producto';
+  document.getElementById('formSubtitle').textContent='Crea un nuevo producto o servicio';
   updatePricePreview();
 }
 function updatePricePreview(){
@@ -1112,6 +1199,8 @@ function editProduct(id){
   if(p.imagen)document.getElementById('pPreview').src=p.imagen;
   document.getElementById('saveBtn').textContent='Guardar cambios';
   document.getElementById('cancelEdit').hidden=false;
+  document.getElementById('formTitle').textContent='Editar producto';
+  document.getElementById('formSubtitle').textContent='Modificando: '+(p.nombre||'');
   updatePricePreview();
   document.getElementById('productForm').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -1128,7 +1217,7 @@ function resetCatForm(){
   document.getElementById('catForm').reset();
   document.getElementById('catId').value='';
   document.getElementById('catPreview').src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72'><rect width='72' height='72' fill='%23e5e7eb'/></svg>";
-  document.getElementById('catSaveBtn').textContent='Agregar categoria';
+  document.getElementById('catSaveBtn').textContent='Agregar categoría';
   document.getElementById('catCancel').hidden=true;
 }
 
@@ -1362,7 +1451,6 @@ function bindEventos(){
     toast('Configuracion guardada');renderTodo();
   };
 
-  /* ===== CAMBIAR CORREO ===== */
   document.getElementById('changeEmailBtn').onclick=async function(){
     var newEmail=document.getElementById('accNewEmail').value.trim();
     var pass=document.getElementById('accEmailPass').value;
@@ -1384,7 +1472,6 @@ function bindEventos(){
     document.getElementById('accEmailPass').value='';
   };
 
-  /* ===== CAMBIAR CONTRASENA ===== */
   document.getElementById('changePassBtn').onclick=async function(){
     var p1=document.getElementById('accNewPass').value;
     var p2=document.getElementById('accNewPass2').value;
