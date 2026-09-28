@@ -139,6 +139,7 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
 .st2{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin:1.4rem 0 .7rem;padding-top:1.2rem;border-top:1px solid var(--bd)}
 .al2{display:flex;gap:.8rem;padding:.9rem 1rem;border-radius:12px;margin-bottom:1rem;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);font-size:.84rem;align-items:flex-start}
 .al2.dg{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35)}
+.al2.info{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.35)}
 .al2 b{display:block;margin-bottom:.15rem}
 .ebn{position:fixed;top:0;left:0;right:0;background:var(--dg);color:#fff;padding:.7rem 1rem;font-size:.85rem;font-weight:600;z-index:400;text-align:center;transform:translateY(-100%);transition:transform .3s;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .ebn.sh{transform:none}
@@ -165,6 +166,8 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
 .stat b{display:block;font-size:1.25rem}
 .stat span{font-size:.7rem;color:var(--mu)}
 .notranslate,[translate="no"]{font-feature-settings:normal}
+.chk{display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.88rem;font-weight:600}
+.chk input{width:18px;height:18px;accent-color:var(--pr);cursor:pointer}
 
 .favBtn{position:absolute;top:.65rem;right:.65rem;z-index:3;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#666;transition:.2s;box-shadow:0 3px 10px rgba(0,0,0,.15)}
 [data-theme="dark"] .favBtn{background:rgba(20,22,32,.85)}
@@ -205,7 +208,6 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
 .countdown.done{background:#6b7280;box-shadow:none}
 .cdChip{display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;font-weight:800;background:linear-gradient(135deg,#ef4444,#f97316);color:#fff;padding:.25rem .5rem;border-radius:99px;position:absolute;bottom:.65rem;right:.65rem;z-index:2;font-variant-numeric:tabular-nums;box-shadow:0 3px 10px rgba(239,68,68,.4)}
 
-/* FASE 4: Categorias visuales + Resenas */
 .catsGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.7rem;margin-bottom:1.6rem}
 .catCard{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;text-align:center;cursor:pointer;transition:.2s;padding:0}
 .catCard:hover{transform:translateY(-3px);box-shadow:var(--sh);border-color:var(--pr)}
@@ -495,9 +497,41 @@ textarea.in{resize:vertical;min-height:75px;font-family:inherit}
         <div class="fl"><label>Envio gratis a partir de (CUP)</label><input class="in" id="cfgEnvioGratis" type="number" min="0" step="1" value="0"><small>0 = desactivado</small></div>
         <div class="fl"><label>Umbral global stock bajo</label><input class="in" id="cfgStockBajo" type="number" min="0" value="5"></div>
       </div>
-      <div class="ma" style="justify-content:space-between">
-        <button class="bt bg2 bsm" id="logoutBtn">Cerrar sesion</button>
+      <div class="ma">
         <button class="bt bp" id="saveConfigBtn">Guardar configuracion</button>
+      </div>
+
+      <div class="st2">Cambiar mis credenciales</div>
+      <div class="al2 info">
+        <div style="flex:1">
+          <b>Nota importante:</b>
+          Al cambiar el correo, Supabase te enviara un mensaje al nuevo correo para confirmar el cambio. Debes hacer clic en ese enlace para que se aplique.
+          El cambio de contrasena es inmediato.
+        </div>
+      </div>
+      <div class="fl">
+        <label>Correo actual</label>
+        <input class="in" id="accCurrentEmail" type="email" readonly style="opacity:.7;cursor:not-allowed">
+      </div>
+      <div class="rw">
+        <div class="fl"><label>Nuevo correo</label><input class="in" id="accNewEmail" type="email" placeholder="nuevo@email.com"></div>
+        <div class="fl"><label>Tu contrasena actual (para confirmar)</label><input class="in" id="accEmailPass" type="password" placeholder="********"></div>
+      </div>
+      <div class="ma" style="justify-content:flex-start;margin-top:0">
+        <button class="bt bp bsm" id="changeEmailBtn">Actualizar correo</button>
+      </div>
+
+      <div class="st2" style="margin-top:1rem;border-top:0;padding-top:0"></div>
+      <div class="rw">
+        <div class="fl"><label>Nueva contrasena</label><input class="in" id="accNewPass" type="password" placeholder="Minimo 6 caracteres"></div>
+        <div class="fl"><label>Confirmar contrasena</label><input class="in" id="accNewPass2" type="password" placeholder="Repite la contrasena"></div>
+      </div>
+      <div class="ma" style="justify-content:flex-start;margin-top:0">
+        <button class="bt bp bsm" id="changePassBtn">Actualizar contrasena</button>
+      </div>
+
+      <div class="ma" style="justify-content:space-between;margin-top:1.5rem">
+        <button class="bt bg2 bsm" id="logoutBtn">Cerrar sesion</button>
       </div>
     </div>
   </div>
@@ -526,7 +560,6 @@ function cleanPhone(s){return String(s||'').replace(/\D/g,'').slice(0,15);}
 function debounce(fn,ms){ms=ms||180;var t;return function(){var a=arguments,c=this;clearTimeout(t);t=setTimeout(function(){fn.apply(c,a);},ms);};}
 function toast(m,ms){ms=ms||2400;var e=document.createElement('div');e.className='ts';e.textContent=m;$('#toastWrap').appendChild(e);setTimeout(function(){e.style.transition='opacity .3s, transform .3s';e.style.opacity='0';e.style.transform='translateY(10px)';setTimeout(function(){e.remove();},320);},ms);}
 function notrans(s){return '<span class="notranslate" translate="no">'+s+'</span>';}
-function stripTags(s){return String(s||'').replace(/<[^>]+>/g,'');}
 function fmtNum(n){n=Number(n)||0;return Number.isInteger(n)?n.toString():n.toFixed(2);}
 function presHTML(p){if(!p.presentacion)return '';return '<div class="presTag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>'+esc(p.presentacion)+'</div>';}
 function timeAgo(iso){if(!iso)return '';var d=new Date(iso);var s=(Date.now()-d.getTime())/1000;if(s<60)return 'ahora';if(s<3600)return Math.floor(s/60)+' min';if(s<86400)return Math.floor(s/3600)+' h';return Math.floor(s/86400)+' d';}
@@ -836,7 +869,6 @@ function pushRecent(id){
   renderRecent();
 }
 
-/* ===== RESEÑAS ===== */
 function openReviews(id){
   state.revProductId=id;
   var p=state.products.filter(function(x){return x.id===id;})[0];if(!p)return;
@@ -1006,12 +1038,16 @@ function updateAdminAccess(){document.getElementById('adminBtn').hidden=!(state.
 function openAdmin(){
   if(state.isAdmin){
     document.getElementById('loginView').hidden=true;document.getElementById('panelView').hidden=false;
-    fillConfigForm();renderAdminList();renderCatAdmin();renderRevAdmin();renderLowStockAlert();
+    fillConfigForm();renderAdminList();renderCatAdmin();renderRevAdmin();renderLowStockAlert();fillCurrentEmail();
   }else{document.getElementById('loginView').hidden=false;document.getElementById('panelView').hidden=true;}
   document.getElementById('adminModal').classList.add('op');
   updateWaFloatContext();
 }
 function closeAdmin(){document.getElementById('adminModal').classList.remove('op');updateWaFloatContext();}
+
+async function fillCurrentEmail(){
+  try{var s=await supa.auth.getSession();if(s.data&&s.data.session){document.getElementById('accCurrentEmail').value=s.data.session.user.email||'';}}catch(e){}
+}
 
 function fillConfigForm(){
   document.getElementById('cfgTienda').value=state.config.tienda;
@@ -1159,7 +1195,6 @@ function bindEventos(){
     var d=e.target.closest('[data-fav-del]');if(d){toggleFav(d.dataset.favDel);}
   };
 
-  /* Reseñas modal */
   document.getElementById('starPick').onclick=function(e){
     var s=e.target.closest('span[data-v]');if(!s)return;
     var v=Number(s.dataset.v);window._revStars=v;
@@ -1249,7 +1284,6 @@ function bindEventos(){
     }
   };
 
-  /* Categorias admin */
   document.getElementById('catFile').onchange=async function(e){var f=e.target.files&&e.target.files[0];if(!f)return;try{toast('Subiendo...');var url=await subirImagen(f);document.getElementById('catImageUrl').value=url;document.getElementById('catPreview').src=url;toast('Imagen lista');}catch(err){showError(err.message);}};
   document.getElementById('catImageUrl').oninput=function(e){var u=e.target.value.trim();if(/^https?:\/\//i.test(u))document.getElementById('catPreview').src=u;};
   document.getElementById('catForm').onsubmit=async function(e){
@@ -1293,7 +1327,6 @@ function bindEventos(){
     }
   };
 
-  /* Resenas admin */
   document.getElementById('revAdminList').onclick=async function(e){
     var b=e.target.closest('[data-rev-admin]');if(!b)return;
     if(b.dataset.revAdmin==='del'){
@@ -1327,6 +1360,43 @@ function bindEventos(){
     state.config.tienda=cfg.tienda;state.config.whatsapp=cfg.whatsapp;state.config.pageSize=cfg.page_size;state.config.stockBajo=cfg.stock_bajo;state.config.tasaCup=cfg.tasa_cup;state.config.envioGratis=cfg.envio_gratis_desde;
     state.visibleCount=cfg.page_size;
     toast('Configuracion guardada');renderTodo();
+  };
+
+  /* ===== CAMBIAR CORREO ===== */
+  document.getElementById('changeEmailBtn').onclick=async function(){
+    var newEmail=document.getElementById('accNewEmail').value.trim();
+    var pass=document.getElementById('accEmailPass').value;
+    if(!newEmail)return toast('Escribe el nuevo correo');
+    if(!/^[^@]+@[^@]+\.[^@]+$/.test(newEmail))return toast('Correo invalido');
+    if(!pass)return toast('Confirma con tu contrasena actual');
+    var b=this;b.disabled=true;b.textContent='Verificando...';
+    var sess=await supa.auth.getSession();
+    if(!sess.data||!sess.data.session){b.disabled=false;b.textContent='Actualizar correo';return toast('Sesion expirada');}
+    var currentEmail=sess.data.session.user.email;
+    var re=await supa.auth.signInWithPassword({email:currentEmail,password:pass});
+    if(re.error){b.disabled=false;b.textContent='Actualizar correo';return toast('Contrasena incorrecta');}
+    b.textContent='Actualizando...';
+    var r=await supa.auth.updateUser({email:newEmail});
+    b.disabled=false;b.textContent='Actualizar correo';
+    if(r.error){showError(r.error.message);return toast('Error: '+r.error.message);}
+    toast('Revisa tu nuevo correo para confirmar el cambio');
+    document.getElementById('accNewEmail').value='';
+    document.getElementById('accEmailPass').value='';
+  };
+
+  /* ===== CAMBIAR CONTRASENA ===== */
+  document.getElementById('changePassBtn').onclick=async function(){
+    var p1=document.getElementById('accNewPass').value;
+    var p2=document.getElementById('accNewPass2').value;
+    if(!p1||p1.length<6)return toast('La contrasena debe tener al menos 6 caracteres');
+    if(p1!==p2)return toast('Las contrasenas no coinciden');
+    var b=this;b.disabled=true;b.textContent='Actualizando...';
+    var r=await supa.auth.updateUser({password:p1});
+    b.disabled=false;b.textContent='Actualizar contrasena';
+    if(r.error){showError(r.error.message);return toast('Error: '+r.error.message);}
+    toast('Contrasena actualizada correctamente');
+    document.getElementById('accNewPass').value='';
+    document.getElementById('accNewPass2').value='';
   };
 }
 
